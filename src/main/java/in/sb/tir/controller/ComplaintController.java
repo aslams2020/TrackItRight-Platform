@@ -1,80 +1,95 @@
 package in.sb.tir.controller;
 
-import in.sb.tir.model.Complaint;
+import in.sb.tir.dto.ComplaintRequest;
+import in.sb.tir.model.*;
+import in.sb.tir.repository.DepartmentRepository;
+import in.sb.tir.repository.UserRepository;
 import in.sb.tir.service.ComplaintService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @RestController
 @RequestMapping("/api/complaints")
 public class ComplaintController {
 
-    private final ComplaintService complaintService;
-
-    public ComplaintController(ComplaintService complaintService) {
-        this.complaintService = complaintService;
-    }
-
+    @Autowired
+    private ComplaintService complaintService;
+    
+    @Autowired
+    private UserRepository userRepository;
+    
+    @Autowired
+    private DepartmentRepository departmentRepository;
+    
+    // Citizen submits complaint
+    
     @PostMapping
-    public Complaint createComplaint(@RequestBody Complaint complaint) {
-        return complaintService.createComplaint(complaint);
+    public ResponseEntity<Complaint> createComplaint(@RequestBody ComplaintRequest request,
+                                                     Authentication authentication) {
+        // 1. Logged-in user
+        String email = authentication.getName();
+        User citizen = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // 2. Fetch department
+        Department dept = departmentRepository.findById(request.getDepartmentId())
+                .orElseThrow(() -> new RuntimeException("Department not found"));
+
+        // 3. Build complaint
+        Complaint complaint = new Complaint();
+        complaint.setTitle(request.getTitle());
+        complaint.setDescription(request.getDescription());
+        complaint.setCitizen(citizen);
+        complaint.setDepartment(dept);
+
+        // 4. Save
+        Complaint savedComplaint = complaintService.createComplaint(complaint);
+
+        return ResponseEntity.ok(savedComplaint);
     }
 
-    @GetMapping
-    public List<Complaint> getAllComplaints() {
-        return complaintService.getAllComplaints();
+
+    // Citizen views their complaints
+    @GetMapping("/citizen/{id}")
+    public List<Complaint> getComplaintsByCitizen(@PathVariable Long id) {
+        return complaintService.getComplaintsByCitizen(id);
+    }
+
+    // Authority updates status
+//    @PutMapping("/{complaintId}/status")
+//    public Complaint updateStatus(@PathVariable Long complaintId,
+//                                  @RequestParam ComplaintStatus status,
+//                                  @RequestBody User authority) {
+//        return complaintService.updateComplaintStatus(complaintId, status, authority);
+//    }
+    @PutMapping("/{complaintId}/status")
+    public Complaint updateStatus(@PathVariable Long complaintId,
+                                  @RequestParam ComplaintStatus status,
+                                  Authentication authentication) {
+        String email = authentication.getName();
+
+        User authority = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Authority not found"));
+
+        return complaintService.updateComplaintStatus(complaintId, status, authority);
+    }
+
+
+    // Admin reassigns complaint
+    @PutMapping("/{complaintId}/reassign")
+    public Complaint reassignComplaint(@PathVariable Long complaintId,
+                                       @RequestBody User newAuthority) {
+        return complaintService.reassignComplaint(complaintId, newAuthority);
     }
     
-    @PatchMapping("/{id}/status")
-    public Complaint updateStatus(@PathVariable Long id, @RequestParam String status) {
-        return complaintService.updateStatus(id, status);
+    @GetMapping("/department/{id}")
+    public List<Complaint> getComplaintsByDepartment(@PathVariable Long id) {
+        return complaintService.getComplaintsByDepartment(id);
     }
-
-    @PatchMapping("/{id}/feedback")
-    public Complaint addFeedback(@PathVariable Long id, @RequestParam String feedback) {
-        return complaintService.addFeedback(id, feedback);
-    }
-    
-    @GetMapping("/authority/{authorityId}")
-    public List<Complaint> getComplaintsByAuthority(@PathVariable Long authorityId) {
-        return complaintService.getComplaintsByAuthority(authorityId);
-    }
-    
-    @GetMapping("/authority/{authorityId}/summary")
-    public Map<String, Long> getStatusSummary(@PathVariable Long authorityId) {
-        return complaintService.getStatusSummaryByAuthority(authorityId);
-    }
-
-    @GetMapping("/authority/{authorityId}/summary/date")
-    public Map<String, Long> getStatusSummaryByDate(
-            @PathVariable Long authorityId,
-            @RequestParam String start,
-            @RequestParam String end
-    ) {
-        LocalDateTime startDate = LocalDateTime.parse(start);
-        LocalDateTime endDate = LocalDateTime.parse(end);
-        return complaintService.getStatusSummaryByAuthorityAndDate(authorityId, startDate, endDate);
-    }
-
-    @GetMapping("/authority/{authorityId}/date")
-    public List<Complaint> getComplaintsByDateRange(
-            @PathVariable Long authorityId,
-            @RequestParam String start,
-            @RequestParam String end
-    ) {
-        LocalDateTime startDate = LocalDateTime.parse(start);
-        LocalDateTime endDate = LocalDateTime.parse(end);
-        return complaintService.getComplaintsByAuthorityAndDate(authorityId, startDate, endDate);
-    }
-    
-    @GetMapping("/user/{userId}")
-    public List<Complaint> getComplaintsByUser(@PathVariable Long userId) {
-        return complaintService.getComplaintsByUser(userId);
-    }
-
-
-
 }

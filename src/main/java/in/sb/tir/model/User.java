@@ -1,85 +1,61 @@
 package in.sb.tir.model;
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "users") 
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    private String password;
+    @Column(nullable = false)
+    @JsonIgnore
+    private String password; 
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "enum('ADMIN','USER','AUTHORITY')")
-    private Role role ;
-
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(nullable = false)
+    private Role role;  // USER, AUTHORITY, ADMIN
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-    
-    public enum Role {
-        USER,
-        AUTHORITY,
-        ADMIN
-    }
-    
+    @JoinColumn(name = "department_id")
+    private Department department; // null for USER, set for AUTHORITY
 
+    public User() {}
 
-    
-    // Getters & Setters
-    
-    public Long getId() { 
-    	return id;
-    }
-    public void setId(Long id) { 
-    	this.id = id; 
+    public User(Long id, String name, String email, String password, Role role, Department department) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.department = department;
     }
 
-    public String getName() { 
-    	return name; 
-    }
-    public void setName(String name) { 
-    	this.name = name; 
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public String getEmail() { 
-    	return email;
-    }
-    public void setEmail(String email) { 
-    	this.email = email; 
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public String getPassword() { 
-    	return password; 
-    
-    }
-    public void setPassword(String password) { 
-    	this.password = password; 
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public Role getRole() { 
-    	return role; 
-    }
-    public void setRole(Role role) { 
-    	this.role = role; 
-    }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
-    public LocalDateTime getCreatedAt() { 
-    	return createdAt; 
-    }
-    public void setCreatedAt(LocalDateTime createdAt) { 
-    	this.createdAt = createdAt; 
-    }
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
+
+    public Department getDepartment() { return department; }
+    public void setDepartment(Department department) { this.department = department; }
 }
