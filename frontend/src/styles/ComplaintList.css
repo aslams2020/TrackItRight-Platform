@@ -1,0 +1,75 @@
+/* ComplaintList.css */
+.complaint-list {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  max-width: 800px;
+}
+
+.complaint-list h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.complaint-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.complaint-list li {
+  padding: 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background 0.2s ease;
+}
+
+.complaint-list li:last-child {
+  border-bottom: none;
+}
+
+.complaint-list li:hover {
+  background: #f9fafb;
+}
+
+.complaint-list strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+.complaint-list .status {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+}
+
+/* Example of colored status chips */
+.complaint-list .status.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.complaint-list .status.resolved {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.complaint-list .status.in-progress {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.complaint-list p {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.4;
+}
