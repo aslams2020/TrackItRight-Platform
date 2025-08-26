@@ -1,64 +1,98 @@
-import React, { useState } from "react";
-import "./LoginPage.css"; 
-import {API_BASE_URL} from "../config";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../api/axios';
+import { setAuth } from '../utils/auth';
+import './AuthPages.css';
+import { toast } from '../utils/toast'; // optional helper
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [err, setErr] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const routeByRole = (role) => {
+    if (role === 'USER') return '/citizen';
+    if (role === 'AUTHORITY') return '/authority';
+    if (role === 'ADMIN') return '/admin';
+    return '/';
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setErr('');
+    setLoading(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/users/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await api.post('/api/auth/login', { email, password });
 
-      if (!response.ok) {
-        throw new Error("Invalid email or password");
+      // backend should return: { token, role, id, name, email }
+      const { token, role, id, name, email: userEmail } = res.data;
+
+      if (!token || !id) {
+        setErr('Login failed: token or user id missing in response');
+        setLoading(false);
+        return;
       }
 
-      const data = await response.json();
-      console.log("Login success:", data);
+      // Save everything in localStorage
+      setAuth(token, role, id, name, userEmail);
 
-      // Save user in localStorage for later use
-      localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("userId", id);
+      localStorage.setItem("name", name);
+      localStorage.setItem("email", email);
 
-      // Redirect to dashboard
-      window.location.href = "/dashboard";
-    } catch (err) {
-      setError(err.message);
+      setLoading(false);
+      toast('Login successful ✅');
+      navigate(routeByRole(role));
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+      const msg = error?.response?.data || error.message;
+      setErr(typeof msg === 'string' ? msg : JSON.stringify(msg));
     }
   };
 
   return (
-    <div className="login-container fade-in">
-      <h2 className="login-title">Login to TrackItRight</h2>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email Address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+    <div className="auth-page">
+      <div className="auth-card">
+        <h2>Login to TrackItRight</h2>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <form onSubmit={handleSubmit} className="auth-form">
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-        <button type="submit">Login</button>
-      </form>
+          <label>Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-      {error && <p className="error-text">{error}</p>}
+          {err && <div className="error">{err}</div>}
+
+          <div className="form-actions">
+            <button className="btn" type="submit" disabled={loading}>
+              {loading ? 'Logging in...' : 'Login'}
+            </button>
+
+            <button
+              type="button"
+              className="btn-outline"
+              onClick={() => navigate('/register')}
+            >
+              Create account
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
