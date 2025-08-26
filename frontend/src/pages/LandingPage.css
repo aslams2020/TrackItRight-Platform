@@ -1,0 +1,46 @@
+.landing .hero {
+  text-align: center;
+  padding: 64px 16px;
+  background: linear-gradient(180deg, #f7f9ff 0%, #ffffff 100%);
+  border-radius: 20px;
+  margin-top: 16px;
+}
+
+.landing .hero h1 {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.landing .hero .subtitle {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+.landing .cta {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.features, .steps {
+  margin-top: 40px;
+}
+
+.features h2, .steps h2 {
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card {
+  border: 1px solid #e8e8e8;
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff;
+}
