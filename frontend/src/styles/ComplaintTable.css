@@ -1,0 +1,143 @@
+/* ComplaintTable.css */
+
+.complaint-table {
+  background: #fff;
+  border: 1px solid #e5e7eb;       /* gray-200 */
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.complaint-table h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #111827; /* gray-900 */
+  margin-bottom: 0.75rem;
+}
+
+.complaint-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.complaint-table thead th {
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151; /* gray-700 */
+  padding: 0.75rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb; /* gray-200 */
+  background: #f9fafb; /* gray-50 */
+}
+
+.complaint-table tbody td {
+  padding: 0.75rem 0.75rem;
+  border-bottom: 1px solid #f3f4f6; /* gray-100 */
+  vertical-align: top;
+  color: #1f2937; /* gray-800 */
+}
+
+.complaint-table tbody tr:hover td {
+  background: #f9fafb; /* subtle row hover */
+}
+
+/* Inline action controls (inputs + buttons) */
+.complaint-table .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.complaint-table input[type="text"],
+.complaint-table select {
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #d1d5db;   /* gray-300 */
+  border-radius: 6px;
+  font-size: 0.9rem;
+  min-width: 150px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fff;
+  color: #111827;
+}
+
+.complaint-table input[type="text"]:focus,
+.complaint-table select:focus {
+  outline: none;
+  border-color: #2563eb;             /* primary blue */
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+}
+
+/* Buttons */
+.complaint-table button {
+  background: #2563eb;               /* primary */
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.08s ease;
+}
+
+.complaint-table button:hover {
+  background: #1d4ed8;               /* primary hover */
+}
+
+.complaint-table button:active {
+  transform: scale(0.98);
+}
+
+.complaint-table button:disabled,
+.complaint-table input[disabled],
+.complaint-table select[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Utility cells */
+.complaint-table .status-chip {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  background: #e5e7eb; /* gray-200 */
+  color: #374151;       /* gray-700 */
+}
+
+.complaint-table .status-chip.pending { background: #fef3c7; color: #92400e; }     /* amber */
+.complaint-table .status-chip.in-progress { background: #e0f2fe; color: #075985; }  /* sky */
+.complaint-table .status-chip.resolved { background: #dcfce7; color: #166534; }     /* green */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .complaint-table {
+    padding: 0.75rem;
+  }
+  .complaint-table thead {
+    display: none; /* optional: hide header on small screens */
+  }
+  .complaint-table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    padding: 0.5rem 0;
+  }
+  .complaint-table tbody td {
+    border: none;
+    padding: 0.25rem 0;
+  }
+  .complaint-table .actions {
+    gap: 0.4rem;
+  }
+}
+
+/* Strong focus-visible across the table for accessibility */
+.complaint-table input[type="text"]:focus-visible,
+.complaint-table select:focus-visible,
+.complaint-table button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
