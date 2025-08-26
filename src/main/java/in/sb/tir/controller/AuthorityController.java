@@ -1,78 +1,38 @@
 package in.sb.tir.controller;
 
-import in.sb.tir.dto.RegisterRequest;
 import in.sb.tir.dto.RemarkRequest;
 import in.sb.tir.dto.UpdateStatusRequest;
 import in.sb.tir.model.Complaint;
-import in.sb.tir.model.User;
 import in.sb.tir.service.ComplaintService;
-import in.sb.tir.service.UserService;
-import in.sb.tir.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth")
-public class AuthController {
+@RequestMapping("/api/authority")
+public class AuthorityController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private JwtUtil jwtUtil;
-    
     @Autowired
     private ComplaintService complaintService;
 
-
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
-        User user = userService.registerUser(request);
-        return ResponseEntity.ok(user);
-    }
-
-
-    @PostMapping("/login")
-    public Map<String, String> login(@RequestBody Map<String, String> request) {
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.get("email"), request.get("password"))
-            );
-        } catch (AuthenticationException e) {
-            throw new RuntimeException("Invalid credentials");
-        }
-
-        User user = userService.findByEmail(request.get("email"))
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
-
-        return Map.of("token", token, "role", user.getRole().name());
-    }
-    
+    // List all complaints for the authority's department
     @GetMapping("/complaints")
     public ResponseEntity<List<Complaint>> listDeptComplaints(Authentication auth) {
         String email = auth.getName();
         return ResponseEntity.ok(complaintService.getComplaintsForAuthorityDepartment(email));
     }
-    
+
+    // Self-assign a complaint to the logged-in authority
     @PutMapping("/complaints/{id}/assign-self")
     public ResponseEntity<Complaint> assignSelf(@PathVariable Long id, Authentication auth) {
         String email = auth.getName();
         return ResponseEntity.ok(complaintService.assignToSelf(id, email));
     }
-    
+
+    // Update complaint status (PENDING / IN_PROGRESS / RESOLVED / REJECTED)
     @PutMapping("/complaints/{id}/status")
     public ResponseEntity<Complaint> updateStatus(@PathVariable Long id,
                                                   @RequestBody UpdateStatusRequest req,
@@ -82,8 +42,8 @@ public class AuthController {
                 complaintService.updateStatusByAuthority(id, email, req.getStatus())
         );
     }
-    
-    
+
+    // Add or update resolution remarks
     @PutMapping("/complaints/{id}/remark")
     public ResponseEntity<Complaint> updateRemark(@PathVariable Long id,
                                                   @RequestBody RemarkRequest req,

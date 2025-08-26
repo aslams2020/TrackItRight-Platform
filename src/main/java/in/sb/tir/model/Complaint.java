@@ -31,10 +31,17 @@ public class Complaint {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ComplaintStatus status;
+    
+    @Column(length = 1000)
+    private String remarks;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    @OneToOne(mappedBy = "complaint", cascade = CascadeType.ALL)
+    private ComplaintFeedback feedback;
+
+    
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
@@ -90,4 +97,15 @@ public class Complaint {
 
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public String getRemarks() { return remarks; }
+    public void setRemarks(String remarks) { this.remarks = remarks; }
+    
+    public ComplaintFeedback getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(ComplaintFeedback feedback) {
+        this.feedback = feedback;
+    }
 }

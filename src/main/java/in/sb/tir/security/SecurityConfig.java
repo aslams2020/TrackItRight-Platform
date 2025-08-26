@@ -14,12 +14,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfigurationSource;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
 @Configuration
 public class SecurityConfig {
 
@@ -36,42 +30,23 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // Public endpoints
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
-
-                // Admin
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
-
-                // Authority (specific GET rule first)
-                .requestMatchers(HttpMethod.GET, "/api/complaints/department/**").hasRole("AUTHORITY")
                 .requestMatchers("/api/authority/**").hasRole("AUTHORITY")
-
-                // User
                 .requestMatchers(HttpMethod.POST, "/api/complaints").hasRole("USER")
-                .requestMatchers("/api/user/**").hasRole("USER")
-
-                // All authenticated users can fetch complaints
-                .requestMatchers("/api/complaints/**").hasAnyRole("USER", "AUTHORITY", "ADMIN")
-
-                // Everything else requires auth
+                .requestMatchers("/api/complaints/**").hasAnyRole("USER","AUTHORITY","ADMIN")
                 .anyRequest().authenticated()
             );
 
-        // Custom log filter for debugging which URL is coming in
-        http.addFilterBefore((request, response, chain) -> {
-            System.out.println("➡️ Incoming: " + ((HttpServletRequest) request).getMethod() + " " + request.getRequestId());
-            chain.doFilter(request, response);
-        }, UsernamePasswordAuthenticationFilter.class);
-
-        // JWT filter
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
+    // ✅ Correct PasswordEncoder bean
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
