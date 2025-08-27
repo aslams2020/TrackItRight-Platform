@@ -24,8 +24,12 @@ export default function LandingPage() {
         <p className="subtitle">Automated, Paperless, and Transparent Complaint System</p>
         <div className="cta">
           <button className="btn" onClick={handleStart}>Register a Complaint</button>
-          <Link to="/login" className="btn-outline">Login</Link>
-          <Link to="/register" className="btn-outline">Register</Link>
+
+          {/* ✅ Wrapped auth links in a container */}
+          <div className="auth-links">
+            <Link to="/login" className="btn-outline">Login</Link>
+            <Link to="/register" className="btn-outline">Register</Link>
+          </div>
         </div>
       </section>
 
