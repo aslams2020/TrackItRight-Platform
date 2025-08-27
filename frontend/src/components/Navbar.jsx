@@ -18,7 +18,7 @@ export default function Navbar() {
       {/* Left: Logo / Brand */}
       <div className="nav-left">
         <Link to="/" className="brand">
-          <span className="brand-badge">🚀</span> tir.
+          <span className="brand-badge">🚀</span> TrackItRight.
         </Link>
       </div>
 
