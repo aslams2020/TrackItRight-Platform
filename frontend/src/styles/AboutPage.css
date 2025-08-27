@@ -1,0 +1,81 @@
+.about-container {
+  max-width: 900px;
+  margin: 48px auto;
+  padding: 20px;
+  color: #374151;
+  line-height: 1.8;
+}
+
+/* Title */
+.about-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: center;
+  color: #2563eb;
+  margin-bottom: 18px;
+  letter-spacing: -0.02em;
+}
+
+/* Intro paragraph: slightly larger and centered for readability */
+.about-intro {
+  font-size: 1.08rem;
+  color: #4b5563;
+  text-align: center;
+  margin: 0 auto 28px;
+  max-width: 760px;
+}
+
+/* Sections styled as soft cards without heavy visuals */
+.about-section {
+  margin-bottom: 26px;
+  padding: 18px 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Section headings: your original blue family, slightly deeper */
+.about-section h2 {
+  font-size: 1.25rem;
+  color: #1e40af;
+  margin: 0 0 10px;
+  font-weight: 700;
+}
+
+/* Body text: comfortable reading size and rhythm */
+.about-section p {
+  font-size: 1rem;
+  color: #374151;
+  margin: 0;
+  line-height: 1.85;
+}
+
+/* Subtle hover polish on desktop only */
+@media (hover: hover) and (pointer: fine) {
+  .about-section:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+    transition: box-shadow 160ms ease, transform 160ms ease;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .about-container {
+    padding: 16px;
+    margin: 32px auto;
+  }
+  .about-title {
+    font-size: 1.8rem;
+  }
+  .about-intro {
+    font-size: 1.02rem;
+  }
+  .about-section {
+    padding: 16px;
+  }
+  .about-section h2 {
+    font-size: 1.15rem;
+  }
+}
