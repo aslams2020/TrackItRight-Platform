@@ -45,28 +45,29 @@
   cursor: pointer;
 }
 
-.primary-btn {
+/* For buttons that have both classes */
+.btn.primary-btn {
   background: #facc15 !important;
-  color: #1e3a8a; 
+  color: #000000 !important; 
   border-color: #facc15 !important;
 }
 
-.btn .primary-btn:hover {
+.btn.primary-btn:hover {
   background: #fff;
   color: #1e3a8a;
   transform: translateY(-1px);
   border-color: #facc15;
 }
 
-.btn .secondary-btn {
-  background: #1e3a8a;
-  color: #facc15 !important; 
+.btn.secondary-btn {
+  background: #ffffff;
+  color: #ffa200 !important; 
   border-color: #facc15 !important;
 }
 
-.secondary-btn:hover {
-  background: #2563eb; /* lighter blue */
-  color: #fff;
+.btn.secondary-btn:hover {
+  background: #ffffff;
+  color: #ffb700 !important;
   transform: translateY(-1px);
 }
 
@@ -200,4 +201,139 @@
   .steps-container {
     flex-direction: column;
   }
+}
+
+.stats-section {
+  padding: 60px 20px;
+  background-color: #f9fafb;
+  text-align: center;
+}
+
+.stats-section h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #1e40af;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background-color: #fff;
+  padding: 30px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  width: 180px;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2563eb;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.stat-card p {
+  font-size: 1rem;
+  color: #374151;
+}
+
+/* Small phones (<= 360px) */
+@media (max-width: 360px) {
+  .hero-section { padding: 36px 16px; border-radius: 10px; }
+  .hero-title { font-size: 1.6rem; }
+  .hero-subtitle { font-size: 0.95rem; }
+  .hero-buttons { flex-direction: column; gap: 12px; }
+  .btn { width: 100%; padding: 10px 14px; }
+  .steps-container { gap: 16px; }
+  .step-card { max-width: 100%; padding: 16px; }
+  .timeline-container { gap: 20px; }
+  .stats-section { padding: 40px 16px; }
+  .stats-section h2 { font-size: 1.6rem; margin-bottom: 28px; }
+  .stats-container { gap: 16px; }
+  .stat-card { width: 100%; padding: 20px 16px; }
+  .stat-number { font-size: 2rem; }
+}
+
+/* Phones (<= 480px) */
+@media (max-width: 480px) {
+  .home-container { padding: 16px; }
+  .hero-section { padding: 40px 18px; }
+  .hero-title { font-size: 1.7rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .hero-buttons { flex-direction: column; gap: 12px; }
+  .btn { width: 100%; }
+  .steps-container { flex-direction: column; align-items: stretch; }
+  .step-card { max-width: 100%; }
+  .timeline-container { flex-direction: column; align-items: center; gap: 24px; }
+  .timeline-step:not(:last-child)::after { display: none; }
+  .stats-container { flex-direction: column; align-items: stretch; }
+  .stat-card { width: 100%; }
+}
+
+/* Tablets (481px–768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .home-container { padding: 18px; }
+  .hero-section { padding: 48px 24px; }
+  .hero-title { font-size: 2rem; }
+  .hero-subtitle { font-size: 1.05rem; max-width: 520px; }
+  .hero-buttons { gap: 14px; }
+  .btn { padding: 10px 16px; }
+  .steps-container { justify-content: center; }
+  .step-card { max-width: 320px; flex: 1 1 320px; }
+  .timeline-container { gap: 28px; }
+  .timeline-step { min-width: 200px; }
+  .timeline-step:not(:last-child)::after { right: -40%; }
+  .stats-section { padding: 50px 20px; }
+  .stats-section h2 { font-size: 1.8rem; margin-bottom: 32px; }
+  .stats-container { gap: 24px; }
+  .stat-card { width: 200px; }
+}
+
+/* Small laptops (769px–1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .home-container { padding: 20px; }
+  .hero-section { padding: 56px 28px; }
+  .hero-title { font-size: 2.1rem; }
+  .hero-subtitle { font-size: 1.08rem; max-width: 620px; }
+  .hero-buttons { gap: 16px; }
+  .steps-container { gap: 20px; }
+  .step-card { max-width: 300px; }
+  .timeline-container { gap: 32px; }
+  .timeline-step { min-width: 220px; }
+  .timeline-step:not(:last-child)::after { right: -45%; }
+  .stats-section { padding: 56px 20px; }
+  .stats-section h2 { font-size: 1.9rem; }
+  .stats-container { gap: 28px; }
+  .stat-card { width: 200px; }
+}
+
+/* Large screens (>= 1280px) — gentle scaling */
+@media (min-width: 1280px) {
+  .hero-section { padding: 64px 32px; }
+  .hero-title { font-size: 2.4rem; }
+  .hero-subtitle { font-size: 1.15rem; }
+  .steps-container { gap: 28px; }
+  .timeline-container { gap: 48px; }
+  .stats-section { padding: 72px 24px; }
+  .stats-section h2 { font-size: 2.2rem; }
+  .stat-card { width: 200px; }
+}
+
+/* Pointer/hover specific tweaks */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { transform: translateY(-1px); }
+  .step-card:hover { box-shadow: 0 6px 14px rgba(0,0,0,0.06); transform: translateY(-1px); transition: box-shadow .15s ease, transform .15s ease; }
+  .stat-card:hover { box-shadow: 0 6px 14px rgba(0,0,0,0.06); transform: translateY(-1px); transition: box-shadow .15s ease, transform .15s ease; }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { animation: none; }
+  .btn, .step-card, .stat-card { transition: none; }
 }
