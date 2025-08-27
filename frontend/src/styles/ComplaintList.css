@@ -52,7 +52,6 @@
   margin-bottom: 0.5rem;
 }
 
-/* Example of colored status chips */
 .complaint-list .status.pending {
   background: #fef3c7;
   color: #92400e;
@@ -79,8 +78,8 @@
   gap: 0.5rem;
   margin-top: 0.5rem;
   padding: 0.75rem;
-  background: #f9fafb;           /* gray-50 */
-  border: 1px solid #e5e7eb;     /* gray-200 */
+  background: #f9fafb;         
+  border: 1px solid #e5e7eb;    
   border-radius: 8px;
 }
 
@@ -91,21 +90,20 @@
   align-items: center;
 }
 
-/* Label text near rating controls */
 .complaint-list .rating-label {
   font-size: 0.9rem;
-  color: #374151;                /* gray-700 */
+  color: #374151;              
 }
 
 /* Select and input fields */
 .complaint-list select,
 .complaint-list input[type="text"] {
   padding: 0.5rem 0.6rem;
-  border: 1px solid #d1d5db;     /* gray-300 */
+  border: 1px solid #d1d5db;     
   border-radius: 6px;
   font-size: 0.95rem;
   background: #fff;
-  color: #111827;                /* gray-900 */
+  color: #111827;               
   transition: border-color 0.2s, box-shadow 0.2s;
   min-width: 140px;
 }
@@ -113,7 +111,7 @@
 .complaint-list select:focus,
 .complaint-list input[type="text"]:focus {
   outline: none;
-  border-color: #2563eb;             /* primary blue */
+  border-color: #2563eb;            
   box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
 }
 
@@ -139,21 +137,19 @@
 }
 
 .complaint-list button.secondary {
-  background: #6b7280;           /* gray-500 */
+  background: #6b7280;          
 }
 
 .complaint-list button.secondary:hover {
-  background: #4b5563;           /* gray-600 */
+  background: #4b5563;         
 }
 
-/* Feedback display text */
 .complaint-list .feedback-line {
   margin-top: 0.25rem;
   font-size: 0.9rem;
   color: #374151;
 }
 
-/* Accessible strong focus for keyboard users */
 .complaint-list select:focus-visible,
 .complaint-list input[type="text"]:focus-visible,
 .complaint-list button:focus-visible {
@@ -164,7 +160,7 @@
 
 .star-rating {
   display: inline-flex;
-  flex-direction: row-reverse; /* enable hover fill to left using ~ combinator */
+  flex-direction: row-reverse; 
   gap: 0.25rem;
 }
 
@@ -174,23 +170,20 @@
 
 .star-rating label {
   font-size: 1.4rem;
-  color: #d1d5db;           /* gray-300 for unfilled star */
+  color: #d1d5db;          
   cursor: pointer;
   transition: color 0.15s ease;
 }
 
-/* Hover fill effect */
 .star-rating label:hover,
 .star-rating label:hover ~ label {
-  color: #fbbf24;           /* amber-400 */
-}
+  color: #fbbf24;       
 
-/* Selected state */
+
 .star-rating input:checked ~ label {
-  color: #f59e0b;           /* amber-500 */
+  color: #f59e0b;         
 }
 
-/* Keyboard focus ring on labels (accessibility) */
 .star-rating label:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
