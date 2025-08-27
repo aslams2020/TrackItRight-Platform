@@ -32,7 +32,7 @@ export default function Navbar() {
       {/* Right: Auth + GitHub */}
       <div className="nav-right">
         <a
-          href="https://github.com/yourusername/TrackItRight"
+          href="https://github.com/aslams2020/TrackItRight-Platform"
           target="_blank"
           rel="noopener noreferrer"
           className="github-link"
