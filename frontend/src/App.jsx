@@ -8,6 +8,8 @@ import AuthorityDashboard from './pages/AuthorityDashboard.jsx';
 import AdminDashboard from './pages/AdminDashboard.jsx';
 import ProtectedRoute from './router/ProtectedRoute.jsx';
 import Footer from "./components/Footer.jsx";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 
 export default function App() {
   return (
@@ -18,7 +20,8 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route
             path="/citizen"
             element={
