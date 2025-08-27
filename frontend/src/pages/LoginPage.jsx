@@ -25,8 +25,8 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await api.post('/api/auth/login', { email, password });
-
+      const res = await api.post('http://localhost:8080/api/auth/login', { email, password });
+      
       // backend should return: { token, role, id, name, email }
       const { token, role, id, name, email: userEmail } = res.data;
 
