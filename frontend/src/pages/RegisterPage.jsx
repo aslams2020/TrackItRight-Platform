@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import { toast } from '../utils/toast'; // optional small helper below
@@ -18,33 +18,54 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState('');
 
+  const [departments, setDepartments] = useState([]);
+  const [depsLoading, setDepsLoading] = useState(false);
+  const [depsErr, setDepsErr] = useState('');
+
   const handleChange = (e) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  useEffect(() => {
+    // Only fetch when needed, or fetch once unconditionally if preferred
+    if (form.role !== 'AUTHORITY') return;
+    const loadDeps = async () => {
+      setDepsErr('');
+      setDepsLoading(true);
+      try {
+        const res = await fetch('http://localhost:8080/api/departments', {
+          headers: { 'Accept': 'application/json' }
+        });
+        const text = await res.text();
+        if (!res.ok) throw new Error(text || `HTTP ${res.status}`);
+        const data = text ? JSON.parse(text) : [];
+        setDepartments(Array.isArray(data) ? data : []);
+      } catch (e) {
+        console.error(e);
+        setDepsErr('Failed to load departments.');
+      } finally {
+        setDepsLoading(false);
+      }
+    };
+    loadDeps();
+  }, [form.role]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErr('');
     setLoading(true);
-
-    // Build register payload expected by backend RegisterRequest
-    const payload = {
-      name: form.name,
-      email: form.email,
-      password: form.password,
-      role: form.role
-    };
-
-    // Optional departmentId - send only if present
-    if (form.departmentId) {
-      try {
-        payload.departmentId = Number(form.departmentId);
-      } catch (ignore) {}
-    }
-
     try {
+      const payload = {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+        role: form.role
+      };
+      // Only include departmentId if role is AUTHORITY and a department is selected
+      if (form.role === 'AUTHORITY' && form.departmentId) {
+        payload.departmentId = Number(form.departmentId);
+      }
       const res = await api.post('/api/auth/register', payload);
-      // Backend returns created user object (or success)
       setLoading(false);
       toast('Registration successful — please login');
       navigate('/login');
@@ -79,14 +100,25 @@ export default function RegisterPage() {
 
           {form.role === 'AUTHORITY' && (
             <>
-              <label>Department ID (optional)</label>
-              <input
+              <label>Department</label>
+              <select
                 name="departmentId"
                 value={form.departmentId}
                 onChange={handleChange}
-                placeholder="Enter department id (e.g., 1)"
-              />
-              <small className="muted">If you know the department id, enter it; admin can link later too.</small>
+                disabled={depsLoading || !!depsErr}
+                required={false}
+              >
+                <option value="">{depsLoading ? 'Loading...' : 'Select department (optional)'}</option>
+                {departments.map(d => (
+                  <option key={d.id} value={d.id}>
+                    {d.name}{d.description ? ` — ${d.description}` : ''}
+                  </option>
+                ))}
+              </select>
+              {depsErr && <div className="error">{depsErr}</div>}
+              <small className="muted">
+                Selecting a department is optional; admin can link later too.
+              </small>
             </>
           )}
 
