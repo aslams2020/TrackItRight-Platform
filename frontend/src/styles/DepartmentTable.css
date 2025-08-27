@@ -1,0 +1,83 @@
+/* src/components/DepartmentTable.css */
+.dept-table h4 {
+  margin: 0 0 .5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.dept-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.dept-table thead th {
+  text-align: left;
+  font-size: .9rem;
+  font-weight: 600;
+  padding: .6rem .6rem;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.dept-table tbody td {
+  padding: .6rem .6rem;
+  border-bottom: 1px solid #f3f4f6;
+  color: #1f2937;
+}
+
+.dept-table tbody tr:hover td { background: #f9fafb; }
+
+.dept-table input {
+  width: 100%;
+  padding: .45rem .6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: .95rem;
+  transition: border-color .2s, box-shadow .2s;
+}
+.dept-table input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37,99,235,.2);
+}
+
+.row-actions {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+.dept-table button {
+  background: #2563eb; color: #fff;
+  border: none; border-radius: 8px;
+  padding: .45rem .8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s, transform .08s;
+}
+.dept-table button:hover { background: #1d4ed8; }
+.dept-table button:active { transform: scale(.98); }
+
+.dept-table button.secondary {
+  background: #6b7280; /* gray-500 */
+}
+.dept-table button.secondary:hover { 
+    background: #4b5563; 
+}
+
+.dept-table button.danger {
+  background: #dc2626;
+}
+
+.dept-table button.danger:hover { 
+    background: #b91c1c; 
+}
+
+.muted 
+{ color: #6b7280; 
+    text-align: center; 
+    padding: .75rem; 
+}
