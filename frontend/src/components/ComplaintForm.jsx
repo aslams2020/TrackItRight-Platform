@@ -6,34 +6,30 @@ const ComplaintForm = ({ onComplaintAdded }) => {
   const [description, setDescription] = useState("");
   const [departmentId, setDepartmentId] = useState("");
   const [departments, setDepartments] = useState([]);
-  const [loadingDeps, setLoadingDeps] = useState(false);
-  const [errDeps, setErrDeps] = useState("");
-
+  const [depsLoading, setDepsLoading] = useState(false);
+  const [depsErr, setDepsErr] = useState("");
   const token = localStorage.getItem("token");
 
-  const loadDepartments = async () => {
-    setErrDeps("");
-    setLoadingDeps(true);
-    try {
-      const res = await fetch("http://localhost:8080/api/departments", {
-        headers: {
-          "Accept": "application/json"
-        }
-      });
-      const text = await res.text();
-      if (!res.ok) throw new Error(text || `HTTP ${res.status}`);
-      const data = text ? JSON.parse(text) : [];
-      setDepartments(Array.isArray(data) ? data : []);
-    } catch (e) {
-      console.error(e);
-      setErrDeps("Failed to load departments. Please try again.");
-    } finally {
-      setLoadingDeps(false);
-    }
-  };
-
   useEffect(() => {
-    loadDepartments();
+    const loadDeps = async () => {
+      setDepsLoading(true);
+      setDepsErr("");
+      try {
+        const res = await fetch("http://localhost:8080/api/departments", {
+          headers: { "Accept": "application/json" }
+        });
+        const text = await res.text();
+        if (!res.ok) throw new Error(text || `HTTP ${res.status}`);
+        const data = text ? JSON.parse(text) : [];
+        setDepartments(Array.isArray(data) ? data : []);
+      } catch (e) {
+        console.error(e);
+        setDepsErr("Failed to load departments.");
+      } finally {
+        setDepsLoading(false);
+      }
+    };
+    loadDeps();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -61,9 +57,7 @@ const ComplaintForm = ({ onComplaintAdded }) => {
         throw new Error(text || `HTTP ${res.status}`);
       }
       alert("Complaint registered successfully!");
-      setTitle("");
-      setDescription("");
-      setDepartmentId("");
+      setTitle(""); setDescription(""); setDepartmentId("");
       onComplaintAdded?.();
     } catch (error) {
       console.error("Error submitting complaint:", error);
@@ -96,17 +90,17 @@ const ComplaintForm = ({ onComplaintAdded }) => {
       <select
         value={departmentId}
         onChange={(e) => setDepartmentId(e.target.value)}
+        disabled={depsLoading || !!depsErr}
         required
-        disabled={loadingDeps || !!errDeps}
       >
-        <option value="">{loadingDeps ? "Loading..." : "Select department"}</option>
-        {departments.map((d) => (
+        <option value="">{depsLoading ? "Loading..." : "Select department"}</option>
+        {departments.map(d => (
           <option key={d.id} value={d.id}>
-            {d.name}{d.description ? ` - ${d.description}` : ""}
+            {d.name}{d.description ? ` — ${d.description}` : ""}
           </option>
         ))}
       </select>
-      {errDeps && <div className="form-error">{errDeps}</div>}
+      {depsErr && <div className="form-error">{depsErr}</div>}
 
       <button type="submit">Submit Complaint</button>
     </form>
