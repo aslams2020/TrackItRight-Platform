@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { isAuthed, getRole } from "../utils/auth.js";
 import "./Home.css";
 
 export default function Home() {
-  const [trackingId, setTrackingId] = useState("");
+  const navigate = useNavigate();
+  const authed = isAuthed();
+  const role = getRole();
 
-  const handleTrackSubmit = (e) => {
-    e.preventDefault();
-    if (trackingId.trim()) {
-      // For now, just alert - you can later route to a tracking results page
-      alert(`Tracking complaint ID: ${trackingId}`);
+  const handleStart = () => {
+    if (!authed) {
+      navigate("/login");
+    } else {
+      if (role === "USER") navigate("/citizen");
+      else if (role === "AUTHORITY") navigate("/authority");
+      else navigate("/admin");
     }
   };
 
@@ -20,65 +25,81 @@ export default function Home() {
           Welcome to <span>TrackItRight</span>
         </h1>
         <p className="hero-subtitle">
-          Report any civic issue, track its progress, and get it resolved efficiently.
+          Automated, Paperless, and Transparent Complaint System
         </p>
         <div className="hero-buttons">
-          <a href="/register" className="btn primary-btn">
-            Report a Complaint
-          </a>
-          <a href="/login" className="btn secondary-btn">
+          <button className="btn primary-btn" onClick={handleStart}>
+            Register a Complaint
+          </button>
+          <Link to="/login" className="btn secondary-btn">
             Login
-          </a>
+          </Link>
+          <Link to="/register" className="btn secondary-btn">
+            Register
+          </Link>
         </div>
       </section>
 
-      {/* Complaint Tracking Section (currently disabled) */}
-      {/* 
-      <section className="tracking-section">
-        <h2>Track Your Complaint</h2>
-        <form onSubmit={handleTrackSubmit} className="tracking-form">
-          <input
-            type="text"
-            placeholder="Enter your tracking ID"
-            value={trackingId}
-            onChange={(e) => setTrackingId(e.target.value)}
-            required
-          />
-          <button type="submit" className="btn primary-btn">Track</button>
-        </form>
-      </section> 
-      */}
-
-      {/* Info Section */}
+      {/* Features Section */}
       <section className="info-section">
-        <h2>How It Works</h2>
+        <h2>Why TrackItRight?</h2>
         <div className="steps-container">
           <div className="step-card">
             <span className="step-number">1</span>
-            <h3>Submit</h3>
-            <p>Register or log in, describe your problem, and submit a complaint with details.</p>
+            <h3>Transparency</h3>
+            <p>Follow every step of your complaint with real-time status.</p>
           </div>
           <div className="step-card">
             <span className="step-number">2</span>
-            <h3>Track</h3>
-            <p>Get a unique complaint ID and see real-time updates on its progress.</p>
+            <h3>Accountability</h3>
+            <p>Departments and authorities are assigned and tracked.</p>
           </div>
           <div className="step-card">
             <span className="step-number">3</span>
-            <h3>Resolve</h3>
-            <p>The respective authority resolves your issue and you can provide feedback.</p>
+            <h3>Feedback</h3>
+            <p>Rate resolutions and improve service quality continuously.</p>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="footer">
-        <p>© {new Date().getFullYear()} TrackItRight. All rights reserved.</p>
-        <p>Made with 💙 by Aslam</p>
-        <p className="footer-links">
-          <a href="https://www.linkedin.com/in/aslamsayyad02/">LinkedIn</a> | <a href="https://github.com/aslams2020">GitHub</a>
-        </p>
-      </footer>
+      {/* How It Works - Timeline Style */}
+<section className="how-it-works">
+  <h2>How It Works</h2>
+  <div className="timeline-container">
+    <div className="timeline-step">
+      <div className="step-number">1</div>
+      <div className="step-text">
+        <h3>Login / Register</h3>
+        <p>Create your account or log in to start reporting issues.</p>
+      </div>
+    </div>
+
+    <div className="timeline-step">
+      <div className="step-number">2</div>
+      <div className="step-text">
+        <h3>Submit</h3>
+        <p>Select department, describe the issue, and submit a complaint.</p>
+      </div>
+    </div>
+
+    <div className="timeline-step">
+      <div className="step-number">3</div>
+      <div className="step-text">
+        <h3>Track</h3>
+        <p>Get real-time updates from your dashboard until resolved.</p>
+      </div>
+    </div>
+
+    <div className="timeline-step">
+      <div className="step-number">4</div>
+      <div className="step-text">
+        <h3>Feedback</h3>
+        <p>Once resolved, provide feedback and close the complaint.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
     </div>
   );
 }
