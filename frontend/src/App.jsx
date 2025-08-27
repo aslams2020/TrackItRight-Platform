@@ -1,12 +1,13 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
-import LandingPage from './pages/LandingPage.jsx';
+import Home from "./pages/Home.jsx";
 import LoginPage from './pages/LoginPage.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import CitizenDashboard from './pages/CitizenDashboard.jsx';
 import AuthorityDashboard from './pages/AuthorityDashboard.jsx';
 import AdminDashboard from './pages/AdminDashboard.jsx';
 import ProtectedRoute from './router/ProtectedRoute.jsx';
+import Footer from "./components/Footer.jsx";
 
 export default function App() {
   return (
@@ -14,7 +15,7 @@ export default function App() {
       <Navbar />
       <div className="container">
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
 
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
+      <Footer />
     </>
   );
 }
