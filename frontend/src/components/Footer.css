@@ -1,16 +1,21 @@
 .footer {
   text-align: center;
-  padding: 20px;
-  background-color: #1e3a8a; /* dark blue to match theme */
-  color: #facc15; /* gold text */
+  padding: 10px;
+  background :linear-gradient(135deg, rgb(37, 99, 235), rgb(30, 64, 175));
+  color: #ffcc00; /* gold text */
   border-radius: 12px 12px 0 0;
   margin-top: 40px;
   position: relative;
-  font-size: 0.9rem;
+  font-size: 1rem;
+}
+
+.footer p {
+  color: #ffffff;
 }
 
 .footer-links a {
-  color: #facc15;
+  font-weight: 600;
+  color: #ffffff;
   text-decoration: none;
   margin: 0 5px;
 }
