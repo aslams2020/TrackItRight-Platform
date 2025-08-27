@@ -178,7 +178,7 @@
 .star-rating label:hover,
 .star-rating label:hover ~ label {
   color: #fbbf24;       
-
+}
 
 .star-rating input:checked ~ label {
   color: #f59e0b;         
