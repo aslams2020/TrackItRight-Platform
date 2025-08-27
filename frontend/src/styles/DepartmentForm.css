@@ -1,0 +1,60 @@
+/* src/components/DepartmentForm.css */
+.dept-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.dept-form h4 {
+  margin: 0 0 .25rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.dept-form label {
+  font-size: .85rem;
+  color: #374151;
+}
+
+.dept-form input,
+.dept-form textarea {
+  width: 100%;
+  padding: .6rem .75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: .95rem;
+  transition: border-color .2s, box-shadow .2s;
+  background: #fff;
+  color: #111827;
+}
+
+.dept-form textarea { min-height: 90px; resize: vertical; }
+
+.dept-form input:focus,
+.dept-form textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37,99,235,.2);
+}
+
+.dept-form button {
+  width: fit-content;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: .55rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s, transform .08s;
+}
+.dept-form button:hover { background: #1d4ed8; }
+.dept-form button:active { transform: scale(.98); }
+
+.form-error {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: .5rem .75rem;
+}
