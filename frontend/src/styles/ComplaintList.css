@@ -73,3 +73,126 @@
   color: #4b5563;
   line-height: 1.4;
 }
+
+.complaint-list .rating-block {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: #f9fafb;           /* gray-50 */
+  border: 1px solid #e5e7eb;     /* gray-200 */
+  border-radius: 8px;
+}
+
+.complaint-list .rating-inline {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Label text near rating controls */
+.complaint-list .rating-label {
+  font-size: 0.9rem;
+  color: #374151;                /* gray-700 */
+}
+
+/* Select and input fields */
+.complaint-list select,
+.complaint-list input[type="text"] {
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #d1d5db;     /* gray-300 */
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #111827;                /* gray-900 */
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-width: 140px;
+}
+
+.complaint-list select:focus,
+.complaint-list input[type="text"]:focus {
+  outline: none;
+  border-color: #2563eb;             /* primary blue */
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+}
+
+/* Buttons */
+.complaint-list button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.08s ease;
+}
+
+.complaint-list button:hover {
+  background: #1d4ed8;
+}
+
+.complaint-list button:active {
+  transform: scale(0.98);
+}
+
+.complaint-list button.secondary {
+  background: #6b7280;           /* gray-500 */
+}
+
+.complaint-list button.secondary:hover {
+  background: #4b5563;           /* gray-600 */
+}
+
+/* Feedback display text */
+.complaint-list .feedback-line {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+/* Accessible strong focus for keyboard users */
+.complaint-list select:focus-visible,
+.complaint-list input[type="text"]:focus-visible,
+.complaint-list button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+
+.star-rating {
+  display: inline-flex;
+  flex-direction: row-reverse; /* enable hover fill to left using ~ combinator */
+  gap: 0.25rem;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 1.4rem;
+  color: #d1d5db;           /* gray-300 for unfilled star */
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+/* Hover fill effect */
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #fbbf24;           /* amber-400 */
+}
+
+/* Selected state */
+.star-rating input:checked ~ label {
+  color: #f59e0b;           /* amber-500 */
+}
+
+/* Keyboard focus ring on labels (accessibility) */
+.star-rating label:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
