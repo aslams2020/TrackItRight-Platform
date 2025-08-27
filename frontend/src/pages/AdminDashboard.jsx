@@ -59,21 +59,44 @@ export default function AdminDashboard() {
     finally { setLoading(false); }
   };
 
+  const objToArray = (obj, keyName, valueName) =>
+  obj && typeof obj === "object"
+    ? Object.entries(obj).map(([k, v]) => ({ [keyName]: k, [valueName]: v }))
+    : [];
+
   const loadReports = async () => {
-    setErr(""); setLoading(true);
+    setErr("");
+    setLoading(true);
     try {
-      const [byDept, byStatus, avg] = await Promise.all([
+      const [byDeptRaw, byStatusRaw, avgRaw] = await Promise.all([
         api("http://localhost:8080/api/admin/reports/complaints-per-department"),
         api("http://localhost:8080/api/admin/reports/complaints-by-status"),
-        api("http://localhost:8080/api/admin/reports/average-rating")
+        api("http://localhost:8080/api/admin/reports/average-rating"),
       ]);
+
+      const byDeptArr = objToArray(byDeptRaw, "departmentName", "count");
+      const byStatusArr = objToArray(byStatusRaw, "status", "count");
+
+      // Average rating:
+      let avgValue = null;
+      if (typeof avgRaw === "number") {
+        avgValue = avgRaw;
+      } else if (avgRaw && typeof avgRaw === "object") {
+        const values = Object.values(avgRaw).filter(v => typeof v === "number");
+        avgValue = values.length ? (values.reduce((a, b) => a + b, 0) / values.length) : null;
+      }
+
       setReports({
-        byDept: Array.isArray(byDept) ? byDept : [],
-        byStatus: Array.isArray(byStatus) ? byStatus : [],
-        averageRating: typeof avg === "number" ? avg : (avg?.value ?? null)
+        byDept: byDeptArr,
+        byStatus: byStatusArr,
+        averageRating: avgValue,
       });
-    } catch (e) { setErr(e.message); }
-    finally { setLoading(false); }
+    } catch (e) {
+      setErr(e.message);
+      setReports({ byDept: [], byStatus: [], averageRating: null });
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
