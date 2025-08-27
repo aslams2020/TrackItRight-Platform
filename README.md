@@ -41,18 +41,16 @@ It connects citizens with the relevant authorities and provides a transparent tr
 4. **Tracking & Feedback**
    - Users track complaint status and give feedback when resolved.
 
-## ✅ Completed
+## What I Made --> 
 - Backend setup with Spring Boot
 - MySQL database integration
 - JWT-based authentication
 - Register & Login APIs
 - Basic complaint submission endpoint
-<!--
-## ⏳ Remaining
+
 - Role-based access (User, Authority, Admin)
 - Complaint status update APIs
 - Feedback & ratings system
 - Complaint filtering/searching
 - React.js frontend integration
 - UI for complaint submission & tracking
---> 
