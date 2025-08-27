@@ -6,6 +6,7 @@ import './AuthPages.css';
 import { ROLE_OPTIONS } from '../utils/constants';
 
 export default function RegisterPage() {
+  
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
