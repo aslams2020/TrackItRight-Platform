@@ -1,0 +1,20 @@
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #1e3a8a; /* dark blue to match theme */
+  color: #facc15; /* gold text */
+  border-radius: 12px 12px 0 0;
+  margin-top: 40px;
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.footer-links a {
+  color: #facc15;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
