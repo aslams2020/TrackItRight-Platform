@@ -1,22 +1,148 @@
-/* AuthorityDashboard.css */
 
 .authority-dashboard {
-  display: grid;
-  gap: 1.25rem;
-  padding: 1rem;
+  padding: 24px;
+  min-height: 100vh;
+  background-color: #f9fafb; 
+  font-family: 'Inter', sans-serif;
 }
 
 .authority-dashboard h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #111827; /* neutral-900 */
-  margin: 0.25rem 0 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1e3a8a; 
+  margin-bottom: 20px;
 }
 
+/* Error banner */
 .error-banner {
-  background: #fef2f2;       /* red-50 */
-  color: #991b1b;            /* red-800 */
-  border: 1px solid #fecaca; /* red-200 */
+  background-color: #fef3c7;
+  color: #92400e;
+  padding: 12px 16px;
   border-radius: 8px;
-  padding: 0.75rem 1rem;
+  margin-bottom: 16px;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.authority-dashboard .complaint-table {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  overflow-x: auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.authority-dashboard .complaint-table:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.complaint-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.complaint-table th, 
+.complaint-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.complaint-table th {
+  background-color: #eff6ff; 
+  color: #1e3a8a; 
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.complaint-table tr:hover {
+  background-color: #f3f4f6;
+}
+
+/* Status chips */
+.status-chip {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.status-chip.active { background-color: #2563eb; }
+.status-chip.pending { background-color: #ffea00; color: #000000; }
+.status-chip.resolved { background-color: #16a34a; } 
+.status-chip.in_progress { background-color: #ffad32f1; } 
+.status-chip.suspended { background-color: #ef4444; }
+
+/* Action buttons inside table */
+.complaint-table .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.complaint-table button {
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.complaint-table button:hover {
+  background-color: #1e40af;
+  transform: translateY(-1px);
+}
+
+/* Secondary buttons (cancel, etc.) */
+.complaint-table button.secondary {
+  background-color: #facc15;
+  color: #1e3a8a;
+}
+
+.complaint-table button.secondary:hover {
+  background-color: #eab308;
+}
+
+/* Inputs & selects in table */
+.complaint-table input[type="text"],
+.complaint-table select {
+  padding: 6px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  width: 120px;
+  transition: all 0.2s ease;
+}
+
+.complaint-table input[type="text"]:focus,
+.complaint-table select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .complaint-table table, 
+  .complaint-table th, 
+  .complaint-table td {
+    font-size: 0.85rem;
+  }
+
+  .complaint-table input[type="text"],
+  .complaint-table select {
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
+  .complaint-table .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
