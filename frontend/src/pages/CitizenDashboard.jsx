@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ComplaintForm from "../components/ComplaintForm";
 import ComplaintList from "../components/ComplaintList";
-
+import "../styles/CitizenDashboard.css"
 const CitizenDashboard = () => {
   const [complaints, setComplaints] = useState([]);
 
