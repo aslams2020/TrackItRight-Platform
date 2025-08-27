@@ -15,6 +15,8 @@ const AuthorityDashboard = () => {
     }
   };
 
+
+
   const fetchComplaints = async () => {
     setError("");
     try {
@@ -57,9 +59,41 @@ const AuthorityDashboard = () => {
     }
   };
 
+  const addRemark = async (id) => {
+    if (!requireToken()) return;
+    const remark = (remarkMap[id] || "").trim();
+    if (!remark) { alert("Enter a remark before submitting."); return; }
+    setUpdating(true);
+    try {
+      const res = await fetch("http://localhost:8080/api/authority/complaints/${id}/remark", {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({ remark })
+      });
+      const { raw } = await parseJsonSafe(res);
+      if (!res.ok) {
+        console.error("Add remark failed:", res.status, raw);
+        alert('Failed to add remark (${res.status}). ${raw?.slice(0,200)}');
+        return;
+      }
+      alert("Remark added!");
+      setRemarkMap(prev => ({ ...prev, [id]: "" }));
+      onUpdate?.();
+    } catch (e) {
+      console.error(e);
+      alert("Network error while adding remark.");
+    } finally { setUpdating(false); }
+  };
+
   useEffect(() => {
     fetchComplaints();
   }, []);
+
+
 
   return (
     <div className="authority-dashboard">
