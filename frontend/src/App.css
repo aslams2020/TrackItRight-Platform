@@ -98,3 +98,38 @@
     justify-content: center;
   }
 }
+
+
+/* Brand Badge (unique left corner) */
+.brand {
+  font-size: 1.4rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #2563eb;
+}
+
+.brand-badge {
+  background: linear-gradient(135deg, #2563eb, #9333ea);
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* GitHub link hover */
+.github-link {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  color: #374151;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.github-link:hover {
+  color: #000;
+  transform: scale(1.1);
+}
