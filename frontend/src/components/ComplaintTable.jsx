@@ -7,6 +7,11 @@ const ComplaintTable = ({ complaints, onUpdate }) => {
   const [remarkMap, setRemarkMap] = useState({});
 
   const token = useMemo(() => localStorage.getItem("token"), []);
+  const currentUserId = useMemo(() => Number(localStorage.getItem("userId")), []);
+
+  const isResolved = (c) => c.status === "RESOLVED";
+  const isAssignedToMe = (c) => c.authority && c.authority.id === currentUserId;
+  const isUnassigned = (c) => !c.authority;
 
   const handleChangeStatus = (id, value) => {
     setStatusMap(prev => ({ ...prev, [id]: value }));
@@ -36,70 +41,26 @@ const ComplaintTable = ({ complaints, onUpdate }) => {
   const updateStatus = async (id) => {
     if (!requireToken()) return;
     const statusUpdate = (statusMap[id] || "").trim();
-    if (!statusUpdate) {
-      alert("Enter a new status before updating.");
-      return;
-    }
+    if (!statusUpdate) { alert("Enter a new status before updating."); return; }
     setUpdating(true);
     try {
       const url = `http://localhost:8080/api/complaints/${id}/status?status=${encodeURIComponent(statusUpdate)}`;
       const res = await fetch(url, {
         method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Accept": "application/json"
-        }
+        headers: { "Authorization": `Bearer ${token}`, "Accept": "application/json" }
       });
-      const { data, raw } = await parseJsonSafe(res);
+      const { raw } = await parseJsonSafe(res);
       if (!res.ok) {
         console.error("Update status failed:", res.status, raw);
-        alert(`Failed to update status (${res.status}).`);
+        alert(`Failed to update status (${res.status}). ${raw?.slice(0,200)}`);
         return;
       }
       alert("Status updated!");
       setStatusMap(prev => ({ ...prev, [id]: "" }));
       onUpdate?.();
     } catch (e) {
-      console.error(e);
-      alert("Network error while updating status.");
-    } finally {
-      setUpdating(false);
-    }
-  };
-
-  const addRemark = async (id) => {
-    if (!requireToken()) return;
-    const remark = (remarkMap[id] || "").trim();
-    if (!remark) {
-      alert("Enter a remark before submitting.");
-      return;
-    }
-    setUpdating(true);
-    try {
-      const res = await fetch(`http://localhost:8080/api/authority/complaints/${id}/remark`, {
-        method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({ remark })
-      });
-      const { data, raw } = await parseJsonSafe(res);
-      if (!res.ok) {
-        console.error("Add remark failed:", res.status, raw);
-        alert(`Failed to add remark (${res.status}).`);
-        return;
-      }
-      alert("Remark added!");
-      setRemarkMap(prev => ({ ...prev, [id]: "" }));
-      onUpdate?.();
-    } catch (e) {
-      console.error(e);
-      alert("Network error while adding remark.");
-    } finally {
-      setUpdating(false);
-    }
+      console.error(e); alert("Network error while updating status.");
+    } finally { setUpdating(false); }
   };
 
   const assignSelf = async (id) => {
@@ -108,26 +69,21 @@ const ComplaintTable = ({ complaints, onUpdate }) => {
     try {
       const res = await fetch(`http://localhost:8080/api/authority/complaints/${id}/assign-self`, {
         method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Accept": "application/json"
-        }
+        headers: { "Authorization": `Bearer ${token}`, "Accept": "application/json" }
       });
-      const { data, raw } = await parseJsonSafe(res);
+      const { raw } = await parseJsonSafe(res);
       if (!res.ok) {
         console.error("Assign self failed:", res.status, raw);
-        alert(`Failed to assign complaint (${res.status}).`);
+        alert(`Failed to assign complaint (${res.status}). ${raw?.slice(0,200)}`);
         return;
       }
       alert("Complaint assigned to you!");
       onUpdate?.();
     } catch (e) {
-      console.error(e);
-      alert("Network error while assigning complaint.");
-    } finally {
-      setUpdating(false);
-    }
+      console.error(e); alert("Network error while assigning complaint.");
+    } finally { setUpdating(false); }
   };
+
 
   return (
     <div className="complaint-table">
@@ -137,8 +93,8 @@ const ComplaintTable = ({ complaints, onUpdate }) => {
           <tr>
             <th style={{ width: "18%" }}>Title</th>
             <th style={{ width: "32%" }}>Description</th>
-            <th style={{ width: "12%" }}>Status</th>
-            <th style={{ width: "38%" }}>Actions</th>
+            <th style={{ width: "14%" }}>Status</th>
+            <th style={{ width: "36%" }}>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -148,44 +104,63 @@ const ComplaintTable = ({ complaints, onUpdate }) => {
                 No complaints to display.
               </td>
             </tr>
-          ) : complaints.map((c) => (
-            <tr key={c.id}>
-              <td>{c.title}</td>
-              <td>{c.description}</td>
-              <td>{c.status}</td>
-              <td>
-                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                  <input
-                    type="text"
-                    placeholder="New Status"
-                    value={statusMap[c.id] || ""}
-                    onChange={(e) => handleChangeStatus(c.id, e.target.value)}
-                    disabled={updating}
-                    style={{ minWidth: 120 }}
-                  />
-                  <button onClick={() => updateStatus(c.id)} disabled={updating}>
-                    Update Status
-                  </button>
+          ) : complaints.map((c) => {
+            const assignedTo = c.authority ? c.authority.name : "Unassigned";
+            const canAssign = isUnassigned(c) && !isResolved(c);
+            const canMutate = isAssignedToMe(c) && !isResolved(c);
 
-                  <input
-                    type="text"
-                    placeholder="Remark"
-                    value={remarkMap[c.id] || ""}
-                    onChange={(e) => handleChangeRemark(c.id, e.target.value)}
-                    disabled={updating}
-                    style={{ minWidth: 160 }}
-                  />
-                  <button onClick={() => addRemark(c.id)} disabled={updating}>
-                    Add Remark
-                  </button>
+            return (
+              <tr key={c.id}>
+                <td>{c.title}</td>
+                <td>{c.description}</td>
+                <td>
+                  <span className={`status-chip ${c.status?.toLowerCase() || ""}`}>
+                    {c.status}
+                  </span>
+                  <div style={{ fontSize: ".8rem", color: "#6b7280", marginTop: 4 }}>
+                    Assigned to: {assignedTo}
+                  </div>
+                </td>
+                <td>
+                  <div className="actions">
+                    {canAssign && (
+                      <button onClick={() => assignSelf(c.id)} disabled={updating}>
+                        Assign to Me
+                      </button>
+                    )}
 
-                  <button onClick={() => assignSelf(c.id)} disabled={updating}>
-                    Assign to Me
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
+                    {canMutate && (
+                      <>
+                        <input
+                          type="text"
+                          placeholder="New Status"
+                          value={statusMap[c.id] || ""}
+                          onChange={(e) => handleChangeStatus(c.id, e.target.value)}
+                          disabled={updating}
+                          style={{ minWidth: 120 }}
+                        />
+                        <button onClick={() => updateStatus(c.id)} disabled={updating}>
+                          Update Status
+                        </button>
+
+                        <input
+                          type="text"
+                          placeholder="Remark"
+                          value={remarkMap[c.id] || ""}
+                          onChange={(e) => handleChangeRemark(c.id, e.target.value)}
+                          disabled={updating}
+                          style={{ minWidth: 160 }}
+                        />
+                        <button onClick={() => addRemark(c.id)} disabled={updating}>
+                          Add Remark
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
