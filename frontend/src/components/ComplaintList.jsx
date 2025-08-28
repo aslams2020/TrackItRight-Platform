@@ -47,7 +47,7 @@ const ComplaintList = ({ complaints, onUpdated }) => {
         <p>No complaints registered yet.</p>
       ) : (
         <ul>
-          {complaints.map((c) => (
+          {[...complaints].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((c) => (
             <li key={c.id}>
               <strong>{c.title}</strong> — {c.status} <br />
               {c.description}
@@ -63,7 +63,7 @@ const ComplaintList = ({ complaints, onUpdated }) => {
                         <div style={{ marginTop: 8, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
                           <label>Rating</label>
                           <select value={rating} onChange={(e) => setRating(e.target.value)}>
-                            {[1,2,3,4,5].map(n => <option key={n} value={n}>{n}</option>)}
+                            {[1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}</option>)}
                           </select>
                           <input
                             type="text"
