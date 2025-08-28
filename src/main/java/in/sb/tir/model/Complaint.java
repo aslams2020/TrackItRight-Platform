@@ -3,6 +3,8 @@ package in.sb.tir.model;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "complaints")
 public class Complaint {
@@ -39,6 +41,7 @@ public class Complaint {
     private LocalDateTime updatedAt;
 
     @OneToOne(mappedBy = "complaint", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private ComplaintFeedback feedback;
 
     
