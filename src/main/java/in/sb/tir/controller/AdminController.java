@@ -1,5 +1,6 @@
 package in.sb.tir.controller;
 
+import in.sb.tir.dto.UserUpdateRequest;
 import in.sb.tir.model.User;
 import in.sb.tir.service.UserService;
 import in.sb.tir.service.DepartmentService;
@@ -32,9 +33,10 @@ public class AdminController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
-        return ResponseEntity.ok(userService.updateUser(id, user));
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserUpdateRequest req) {
+        return ResponseEntity.ok(userService.updateUser(id, req));
     }
+
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
