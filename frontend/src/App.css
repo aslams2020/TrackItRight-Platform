@@ -135,23 +135,22 @@
 }
 
 
-/* Global Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 8px;              /* Thin scrollbar */
-  height: 8px;             /* For horizontal scroll */
+  width: 5px;           
+  height: 8px;            
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;     /* Light background */
+  background: hsl(0, 0%, 100%);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4CAF50;     /* Green thumb */
+  background: #094fdc;    
   border-radius: 10px;
   transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #388E3C;     /* Darker on hover */
+  background: #0742b7;     
 }
