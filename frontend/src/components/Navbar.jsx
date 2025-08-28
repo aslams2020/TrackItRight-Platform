@@ -18,7 +18,7 @@ export default function Navbar() {
       {/* Left: Logo / Brand */}
       <div className="nav-left">
         <Link to="/" className="brand">
-          <span className="brand-badge">🚀</span> TrackItRight.
+          <span className="brand-badge">⚡</span> TrackItRight.
         </Link>
       </div>
 
@@ -29,7 +29,6 @@ export default function Navbar() {
         <NavLink to="/contact" className="nav-link">Contact</NavLink>
       </div>
 
-      {/* Right: Auth + GitHub */}
       <div className="nav-right">
         <a
           href="https://github.com/aslams2020/TrackItRight-Platform"
