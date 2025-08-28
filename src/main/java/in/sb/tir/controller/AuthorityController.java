@@ -1,5 +1,6 @@
 package in.sb.tir.controller;
 
+import in.sb.tir.dto.ComplaintAdminDTO;
 import in.sb.tir.dto.RemarkRequest;
 import in.sb.tir.dto.UpdateStatusRequest;
 import in.sb.tir.model.Complaint;
@@ -10,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/authority")
@@ -20,11 +22,14 @@ public class AuthorityController {
 
     // List all complaints for the authority's department
     @GetMapping("/complaints")
-    public ResponseEntity<List<Complaint>> listDeptComplaints(Authentication auth) {
+    public ResponseEntity<List<ComplaintAdminDTO>> listDeptComplaints(Authentication auth) {
         String email = auth.getName();
-        return ResponseEntity.ok(complaintService.getComplaintsForAuthorityDepartment(email));
+        List<Complaint> complaints = complaintService.getComplaintsForAuthorityDepartment(email);
+        List<ComplaintAdminDTO> dtos = complaints.stream()
+            .map(ComplaintAdminDTO::fromEntity)
+            .collect(Collectors.toList());
+        return ResponseEntity.ok(dtos);
     }
-
     // Self-assign a complaint to the logged-in authority
     @PutMapping("/complaints/{id}/assign-self")
     public ResponseEntity<Complaint> assignSelf(@PathVariable Long id, Authentication auth) {
