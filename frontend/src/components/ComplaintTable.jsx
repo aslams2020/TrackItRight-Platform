@@ -131,22 +131,23 @@ const ComplaintTable = ({ complaints, onUpdate }) => {
       <table>
         <thead>
           <tr>
-            <th style={{ width: "18%" }}>Title</th>
+            <th style={{ width: "16%" }}>Title</th>
             <th style={{ width: "32%" }}>Description</th>
             <th style={{ width: "14%" }}>Status</th>
+            <th style={{ width: "12%" }}>Citizen</th>
             <th style={{ width: "36%" }}>Actions</th>
           </tr>
         </thead>
         <tbody>
           {complaints.length === 0 ? (
             <tr>
-              <td colSpan={4} style={{ textAlign: "center", color: "#6b7280" }}>
+              <td colSpan={5} style={{ textAlign: "center", color: "#6b7280" }}>
                 No complaints to display.
               </td>
             </tr>
           ) : (
             complaints.map((c) => {
-              const assignedTo = c.authority ? c.authority.name : "Unassigned";
+              const assignedTo = c.authority ? (c.authority.name || "-") : "Unassigned";
               const canAssign = isUnassigned(c) && !isResolved(c);
               const canMutate = isAssignedToMe(c) && !isResolved(c);
 
@@ -163,12 +164,22 @@ const ComplaintTable = ({ complaints, onUpdate }) => {
                     </div>
                   </td>
                   <td>
+                    {c.citizen
+                      ? <>
+                          <span>{c.citizen.name}</span>
+                          <br />
+                          <a href={`mailto:${c.citizen.email}`}>{c.citizen.email}</a>
+                        </>
+                      : "-"}
+                  </td>
+                  <td>
                     <div className="actions">
                       {canAssign && (
                         <button onClick={() => assignSelf(c.id)} disabled={updating}>
                           Assign to Me
                         </button>
                       )}
+
                       {canMutate && (
                         <>
                           <input
@@ -182,6 +193,7 @@ const ComplaintTable = ({ complaints, onUpdate }) => {
                           <button onClick={() => updateStatus(c.id)} disabled={updating}>
                             Update Status
                           </button>
+
                           <input
                             type="text"
                             placeholder="Remark"
