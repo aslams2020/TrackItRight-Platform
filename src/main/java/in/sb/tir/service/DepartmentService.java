@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 
 import in.sb.tir.model.Complaint;
 import in.sb.tir.model.ComplaintStatus;
+import in.sb.tir.model.Department;
+import in.sb.tir.repository.ComplaintRepository;
+import in.sb.tir.repository.DepartmentRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,13 +22,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class DepartmentService {
+    private final DepartmentRepository departmentRepository;
+    private final ComplaintRepository complaintRepository;
 
-    @Autowired
-    private DepartmentRepository departmentRepository;
-    
-    @Autowired
-    private ComplaintRepository complaintRepository;
-
+    public DepartmentService(DepartmentRepository departmentRepository,
+                             ComplaintRepository complaintRepository) {
+        this.departmentRepository = departmentRepository;
+        this.complaintRepository = complaintRepository;
+    }
 
     public Department createDepartment(Department department) {
         return departmentRepository.save(department);
@@ -41,14 +47,23 @@ public class DepartmentService {
         return departmentRepository.findByName(name);
     }
 
-    
+    @Transactional
     public Department updateDepartment(Long id, Department dept) {
         Department existing = departmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Department not found"));
-        existing.setName(dept.getName());
+            .orElseThrow(() -> new RuntimeException("Department not found"));
+
+        // Update both fields
+        if (dept.getName() != null) {
+            existing.setName(dept.getName());
+        }
+        // Important: set description from payload so it persists
+        if (dept.getDescription() != null) {
+            existing.setDescription(dept.getDescription());
+        }
+
         return departmentRepository.save(existing);
     }
-    
+
     public void deleteDepartment(Long id) {
         departmentRepository.deleteById(id);
     }
