@@ -66,3 +66,23 @@ body {
   border-radius: 8px;
   cursor: pointer;
 }
+
+::-webkit-scrollbar {
+  width: 5px;           
+  height: 8px;            
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(0, 0%, 100%);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #094fdc;    
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0742b7;     
+}
