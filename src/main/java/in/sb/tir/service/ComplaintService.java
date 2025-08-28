@@ -27,6 +27,9 @@ public class ComplaintService {
 
 	@Autowired
 	private ComplaintFeedbackRepository feedbackRepository;
+	
+	@Autowired
+	private NotificationService notificationService;
 
 	// Citizen files complaint
 	public Complaint createComplaint(Complaint complaint) {
@@ -150,7 +153,13 @@ public class ComplaintService {
 	    assertCanMutateStatus(c, authority);
 	    c.setStatus(status);
 	    c.setUpdatedAt(LocalDateTime.now());
-	    return complaintRepository.save(c);
+	    Complaint saved = complaintRepository.save(c);
+
+	    // Notify complainant
+	    String msg = "Your complaint '" + c.getTitle() + "' status changed to " + status;
+	    notificationService.createNotification(c.getCitizen(), c, msg, "STATUS");
+
+	    return saved;
 	}
 
 	// Authority: add remark (requires assigned to me; blocks if RESOLVED)
@@ -170,10 +179,16 @@ public class ComplaintService {
 	    // Allow remarks as long as assigned to me and not RESOLVED
 	    assertCanAddRemark(c, authority);
 
-	    String existing = c.getRemarks();
-	    c.setRemarks((existing == null || existing.isBlank()) ? remark : existing + " | " + remark);
+	    String existingRemarks = c.getRemarks();
+	    c.setRemarks(existingRemarks == null ? remark : existingRemarks + " | " + remark);
 	    c.setUpdatedAt(LocalDateTime.now());
-	    return complaintRepository.save(c);
+	    Complaint saved = complaintRepository.save(c);
+
+	    // Notify complainant
+	    String msg = "New remark added on your complaint: " + c.getTitle() + "':" + remark;
+	    notificationService.createNotification(c.getCitizen(), c, msg, "REMARK");
+
+	    return saved;
 	}
 
 	// Legacy method (if still used anywhere): keep but enforce policy; prefer updateStatusByAuthority instead
