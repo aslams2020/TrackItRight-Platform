@@ -44,7 +44,7 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public Map<String, String> login(@RequestBody Map<String, String> request) {
+    public ResponseEntity<?> login(@RequestBody Map<String, String> request) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.get("email"), request.get("password"))
@@ -58,8 +58,15 @@ public class AuthController {
 
         String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
 
-        return Map.of("token", token, "role", user.getRole().name());
+        return ResponseEntity.ok(Map.of(
+                "token", token,
+                "id", user.getId().toString(),
+                "name", user.getName(),
+                "email", user.getEmail(),
+                "role", user.getRole().name()
+        ));
     }
+
     
     @GetMapping("/complaints")
     public ResponseEntity<List<Complaint>> listDeptComplaints(Authentication auth) {
