@@ -13,6 +13,11 @@
   color: #2563eb;
 }
 
+.contact-title span {
+  color: #ff9500;
+  
+}
+
 .contact-subtitle {
   margin-bottom: 25px;
   font-size: 1.1rem;
