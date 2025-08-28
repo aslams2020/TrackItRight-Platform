@@ -1,11 +1,14 @@
 package in.sb.tir.service;
 
 import in.sb.tir.dto.RegisterRequest;
+import in.sb.tir.dto.UserUpdateRequest;
 import in.sb.tir.model.Department;
 import in.sb.tir.model.Role;
 import in.sb.tir.model.User;
 import in.sb.tir.repository.DepartmentRepository;
 import in.sb.tir.repository.UserRepository;
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;  // Interface!
 import org.springframework.stereotype.Service;
@@ -62,13 +65,24 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User updateUser(Long id, User user) {
-        User existing = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        existing.setRole(user.getRole());
-        existing.setDepartment(user.getDepartment());
-        return userRepository.save(existing);
+    @Transactional
+    public User updateUser(Long id, UserUpdateRequest req) {
+        User user = userRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (req.getRole() != null) {
+            user.setRole(Role.valueOf(req.getRole())); // or map to your enum
+        }
+
+        if (req.getDepartmentId() != null) {
+            Department dept = departmentRepository.findById(req.getDepartmentId())
+                .orElseThrow(() -> new RuntimeException("Department not found"));
+            user.setDepartment(dept);
+        }
+
+        return userRepository.save(user);
     }
+
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
