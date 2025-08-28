@@ -42,7 +42,7 @@ export default function ContactPage() {
 
     return (
         <div className="contact-container">
-            <h1 className="contact-title">Get in Touch ✉️</h1>
+            <h1 className="contact-title">Get in <span>Touch ✉️</span></h1>
             <p className="contact-subtitle">
                 I’d love to connect! Whether it’s feedback, collaboration, or ideas, drop a message below.
             </p>
