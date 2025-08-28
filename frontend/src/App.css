@@ -133,3 +133,25 @@
   color: #000;
   transform: scale(1.1);
 }
+
+
+/* Global Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;              /* Thin scrollbar */
+  height: 8px;             /* For horizontal scroll */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;     /* Light background */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4CAF50;     /* Green thumb */
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #388E3C;     /* Darker on hover */
+}
