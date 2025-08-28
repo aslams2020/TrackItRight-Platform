@@ -61,13 +61,7 @@ public class ComplaintController {
         return complaintService.getComplaintsByCitizen(id);
     }
 
-    // Authority updates status
-//    @PutMapping("/{complaintId}/status")
-//    public Complaint updateStatus(@PathVariable Long complaintId,
-//                                  @RequestParam ComplaintStatus status,
-//                                  @RequestBody User authority) {
-//        return complaintService.updateComplaintStatus(complaintId, status, authority);
-//    }
+
     @PutMapping("/{complaintId}/status")
     public Complaint updateStatus(@PathVariable Long complaintId,
                                   @RequestParam ComplaintStatus status,
