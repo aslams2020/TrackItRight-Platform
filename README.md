@@ -1,4 +1,4 @@
-# Complaint Chain Tracker for Public Issues
+# TrackItRight⚡: A Complaint Chain Tracker for Public Issues
 
 ## 📌 Overview
 The **Complaint Chain Tracker** is a web application designed to streamline the process of reporting, tracking, and resolving public complaints such as potholes, faulty streetlights, water issues, etc.  
