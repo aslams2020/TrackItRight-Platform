@@ -1,17 +1,23 @@
 package in.sb.tir.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "complaint_feedback")
+@Table(
+  name = "complaint_feedback",
+  uniqueConstraints = @UniqueConstraint(name = "uk_feedback_complaint", columnNames = "complaint_id")
+)
 public class ComplaintFeedback {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "complaint_id", nullable = false)
+    @JsonBackReference
     private Complaint complaint;
 
     @ManyToOne
