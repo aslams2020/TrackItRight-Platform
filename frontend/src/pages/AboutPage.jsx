@@ -3,7 +3,7 @@ import "../styles/AboutPage.css";
 export default function AboutPage() {
   return (
     <div className="about-container">
-      <h1 className="about-title">Why I Built TrackItRight 🚀</h1>
+      <h1 className="about-title">Why I Built <span>TrackItRight⚡</span></h1>
 
       <p className="about-intro">
         TrackItRight started with a simple question that kept coming back: why do civic complaints feel like they disappear the moment they’re submitted? A broken streetlight stays dark, a pothole keeps growing, and the only update is silence. As a Computer Science student, that didn’t sit right with me. I wanted a simple, honest way to show what’s happening from the moment a complaint is raised to the moment it’s resolved.
