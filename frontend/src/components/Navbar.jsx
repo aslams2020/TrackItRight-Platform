@@ -1,6 +1,7 @@
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { isAuthed, getRole, clearAuth } from "../utils/auth.js";
 import { FaGithub } from "react-icons/fa";
+import NotificationsIcon from "../components/notifications/NotificationsIcon";
 
 import "../styles/navbar.css"
 export default function Navbar() {
@@ -25,7 +26,7 @@ export default function Navbar() {
       {/* Center: Navigation Links */}
       <div className="nav-center">
         <NavLink to="/" className="nav-link">Home</NavLink>
-        <NavLink to="/about" className="nav-link">Why I Built This</NavLink>
+        <NavLink to="/about" className="nav-link">Why I Built This?</NavLink>
         <NavLink to="/contact" className="nav-link">Contact</NavLink>
       </div>
 
@@ -39,6 +40,8 @@ export default function Navbar() {
         >
           <FaGithub size={22} />
         </a>
+
+        {authed && <NotificationsIcon />}
 
         {!authed && (
           <>
