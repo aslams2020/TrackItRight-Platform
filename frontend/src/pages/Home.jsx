@@ -46,7 +46,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="hero-section">
         <h1 className="hero-title">
-          Welcome to <span>TrackItRight</span>
+          Welcome to <span>TrackItRight⚡</span>
         </h1>
         <p className="hero-subtitle">
           Automated, Paperless, and Transparent Complaint System
