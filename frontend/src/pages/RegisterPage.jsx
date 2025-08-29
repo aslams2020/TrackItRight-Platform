@@ -6,7 +6,7 @@ import './AuthPages.css';
 import { ROLE_OPTIONS } from '../utils/constants';
 
 export default function RegisterPage() {
-  
+
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
@@ -81,8 +81,8 @@ export default function RegisterPage() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h2>Create an account</h2>
-        <p className="muted">Register as Citizen / Authority / Admin (admin likely for testing).</p>
+        <h2>Create an <span>Account⚡</span></h2>
+        <p className="muted-first">Register as Citizen / Authority / Admin (admin likely for testing).</p>
 
         <form onSubmit={handleSubmit} className="auth-form">
           <label>Full name</label>
@@ -95,12 +95,12 @@ export default function RegisterPage() {
           <input name="password" value={form.password} onChange={handleChange} type="password" required minLength={6} />
 
           <label>Role</label>
-          <select name="role" value={form.role} onChange={handleChange}>
+          <select name="role" value={form.role} onChange={handleChange} className='rolebar'>
             {ROLE_OPTIONS.map(r => <option key={r} value={r}>{r}</option>)}
           </select>
 
           {form.role === 'AUTHORITY' && (
-            <>
+            <div className="authority-group">
               <label>Department</label>
               <select
                 name="departmentId"
@@ -112,7 +112,7 @@ export default function RegisterPage() {
                 <option value="">{depsLoading ? 'Loading...' : 'Select department (optional)'}</option>
                 {departments.map(d => (
                   <option key={d.id} value={d.id}>
-                    {d.name}{d.description ? ` — ${d.description}` : ''}
+                    {d.name}{d.description ? ` - ${d.description}` : ''}
                   </option>
                 ))}
               </select>
@@ -120,13 +120,14 @@ export default function RegisterPage() {
               <small className="muted">
                 Selecting a department is optional; admin can link later too.
               </small>
-            </>
+            </div>
           )}
+
 
           {err && <div className="error">{err}</div>}
 
           <div className="form-actions">
-            <button className="btn" type="submit" disabled={loading}>
+            <button className="btn register-btn" type="submit" disabled={loading}>
               {loading ? 'Registering...' : 'Register'}
             </button>
             <button type="button" className="btn-outline" onClick={() => navigate('/login')}>
