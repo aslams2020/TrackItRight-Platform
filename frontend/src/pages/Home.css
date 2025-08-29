@@ -111,12 +111,21 @@
   margin-bottom: 8px;
 }
 
-/* HOW IT WORKS TIMELINE */
+/* HOW IT WORKS  */
 .how-it-works {
   text-align: center;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
   margin-bottom: 40px;
 }
 
+.how-it-works h2 {
+  margin-bottom: 50px;
+  color: #ff9500;
+  /* font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif !important; */
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 700;
+}
 .timeline-container {
   display: flex;
   justify-content: center;
@@ -204,15 +213,15 @@
 }
 
 .stats-section {
-  padding: 60px 20px;
-  background-color: #f9fafb;
+  padding: 10px 20px !important;
+  background-color: #ffffff;
   text-align: center;
+  margin-bottom: 60px;
 }
 
 .stats-section h2 {
   font-size: 2rem;
-  margin-bottom: 40px;
-  color: #1e40af;
+  color: #ff9500;
 }
 
 .stats-container {
@@ -224,7 +233,7 @@
 
 .stat-card {
   background-color: #fff;
-  padding: 30px 20px;
+  padding: 20px 20px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
   width: 180px;
