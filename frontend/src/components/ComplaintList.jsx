@@ -55,7 +55,7 @@ const ComplaintList = ({ complaints, onUpdated }) => {
                 <div style={{ marginTop: 6, color: "#374151" }}>
                   {c.feedback ? (
                     <span>
-                      Rated: {c.feedback.rating}/5 {c.feedback.comment ? `— “${c.feedback.comment}”` : ""}
+                      Rated: {c.feedback.rating}/5 {c.feedback.comment ? `- “${c.feedback.comment}”` : ""}
                     </span>
                   ) : (
                     <>
