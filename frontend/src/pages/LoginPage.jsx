@@ -57,10 +57,9 @@ export default function LoginPage() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h2>Login to TrackItRight</h2>
-
+        <h2 className="login-h2">Login to <span>TrackItRight⚡</span></h2>
         <form onSubmit={handleSubmit} className="auth-form">
-          <label>Email</label>
+          <label className="login-label">Email</label>
           <input
             type="email"
             value={email}
@@ -68,7 +67,7 @@ export default function LoginPage() {
             required
           />
 
-          <label>Password</label>
+          <label className="login-label">Password</label>
           <input
             type="password"
             value={password}
@@ -79,13 +78,13 @@ export default function LoginPage() {
           {err && <div className="error">{err}</div>}
 
           <div className="form-actions">
-            <button className="btn" type="submit" disabled={loading}>
+            <button className="btn login-buttons" type="submit" disabled={loading}>
               {loading ? 'Logging in...' : 'Login'}
             </button>
 
             <button
               type="button"
-              className="btn-outline"
+              className="btn-outline login-buttons"
               onClick={() => navigate('/register')}
             >
               Create account
