@@ -154,3 +154,26 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #0742b7;     
 }
+
+/* Top progress bar */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;         
+  height: 6px;      
+  background: linear-gradient(90deg, #01123e, #ffffff);
+  z-index: 9999;
+}
+
+
+::-webkit-scrollbar-track {
+background: #e6ecff;
+}
+::-webkit-scrollbar-thumb {
+background: #094fdc;
+border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #083fb1;
+}
