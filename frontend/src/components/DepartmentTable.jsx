@@ -17,7 +17,6 @@ export default function DepartmentTable({ departments, onChange }) {
     setEditingId(null);
     setDraft({ name: "", description: "" });
   };
-// http://localhost:8080/api/admin/departments/${id}
   const saveEdit = async (id) => {
   setBusy(true);
   try {
