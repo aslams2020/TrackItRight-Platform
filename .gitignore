@@ -35,3 +35,9 @@ build/
 
 # .gitignore
 .env
+
+**/.env
+
+.env.*
+
+.env*.local
