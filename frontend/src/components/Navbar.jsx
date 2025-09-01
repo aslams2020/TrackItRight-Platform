@@ -2,8 +2,8 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import { isAuthed, getRole, clearAuth } from "../utils/auth.js";
 import { FaGithub } from "react-icons/fa";
 import NotificationsIcon from "../components/notifications/NotificationsIcon";
+import "../styles/Navbar.css"
 
-import "../styles/navbar.css"
 export default function Navbar() {
   const navigate = useNavigate();
   const authed = isAuthed();
@@ -16,14 +16,12 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      {/* Left: Logo / Brand */}
       <div className="nav-left">
         <Link to="/" className="brand">
           <span className="brand-badge">⚡</span> TrackItRight.
         </Link>
       </div>
-
-      {/* Center: Navigation Links */}
+      
       <div className="nav-center">
         <NavLink to="/" className="nav-link">Home</NavLink>
         <NavLink to="/about" className="nav-link">Why I Built This?</NavLink>
