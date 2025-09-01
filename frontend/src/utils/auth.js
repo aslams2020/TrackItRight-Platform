@@ -1,4 +1,3 @@
-// utils/auth.js
 export const setAuth = (token, role, userId, name, email) => {
   localStorage.setItem("token", token);
   localStorage.setItem("role", role);
