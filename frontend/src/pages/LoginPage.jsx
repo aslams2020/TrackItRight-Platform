@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import { setAuth } from '../utils/auth';
-import './AuthPages.css';
+import '../styles/AuthPages.css';
 import { toast } from '../utils/toast'; 
 
 export default function LoginPage() {
