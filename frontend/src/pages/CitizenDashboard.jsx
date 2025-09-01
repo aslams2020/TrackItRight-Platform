@@ -40,7 +40,7 @@ const CitizenDashboard = () => {
 
   return (
     <div className="citizen-dashboard">
-      <h2>Citizen Dashboard</h2>
+      <h2>Citizen <span className="citizen-span">Dashboard⚡</span> </h2>
       <ComplaintForm onComplaintAdded={fetchComplaints} />
       <ComplaintList complaints={complaints} />
     </div>
