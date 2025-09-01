@@ -33,7 +33,7 @@ export default function DepartmentForm({ onSaved }) {
 
   return (
     <form className="dept-form" onSubmit={handleSubmit}>
-      <h4>Create / Edit Department</h4>
+      <h3>Create / Edit Department</h3>
       {err && <div className="form-error">{err}</div>}
 
       <label>Name</label>
