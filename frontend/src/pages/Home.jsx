@@ -1,8 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { isAuthed, getRole } from "../utils/auth.js";
 import { useState, useEffect } from "react";
-
-import "./Home.css";
+import "../styles/Home.css";
 
 export default function Home() {
   const navigate = useNavigate();
