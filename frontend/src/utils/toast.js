@@ -4,7 +4,7 @@ export const toast = (msg) => {
     el.innerText = msg;
     el.style.position = 'fixed';
     el.style.right = '20px';
-    el.style.top = '20px';
+    el.style.top = '60px';
     el.style.background = '#111';
     el.style.color = '#fff';
     el.style.padding = '10px 14px';
