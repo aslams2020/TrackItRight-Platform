@@ -97,7 +97,7 @@ const AuthorityDashboard = () => {
 
   return (
     <div className="authority-dashboard">
-      <h2>Authority Dashboard</h2>
+      <h2>Authority <span className="authority-span">Dashboard⚡</span></h2>
       {error && <div className="error-banner">{error}</div>}
       <ComplaintTable complaints={complaints} onUpdate={fetchComplaints} />
     </div>
