@@ -63,13 +63,13 @@ export default function DepartmentTable({ departments, onChange }) {
 
   return (
     <div className="dept-table">
-      <h4>Departments</h4>
+      <h1>Departments</h1>
       <table>
         <thead>
           <tr>
-            <th style={{width: "22%"}}>Name</th>
+            <th style={{width: "30%"}}>Name</th>
             <th>Description</th>
-            <th style={{width: "28%"}}>Actions</th>
+            <th style={{width: "18%"}}>Actions</th>
           </tr>
         </thead>
         <tbody>
