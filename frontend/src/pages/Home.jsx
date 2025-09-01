@@ -27,22 +27,21 @@ export default function Home() {
 
     const counter = setInterval(() => {
       start++;
-      obj.innerText = start + "+"; // Add + at the end
+      obj.innerText = start + "+"; 
       if (start >= end) {
         clearInterval(counter);
       }
     }, stepTime);
   };
 
-  animateCounter("complaints-count", 150, 2000); 
-  animateCounter("users-count", 30, 2000);       
-  animateCounter("modules-count", 8, 2000);     
+  animateCounter("complaints-count", 250, 3000); 
+  animateCounter("users-count", 100, 3000);       
+  animateCounter("modules-count", 12, 3000);     
 }, []);
 
 
   return (
     <div className="home-container fade-in">
-      {/* Hero Section */}
       <section className="hero-section">
         <h1 className="hero-title">
           Welcome to <span>TrackItRight⚡</span>
@@ -63,7 +62,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
       <section className="info-section">
         <h2>Why TrackItRight?</h2>
         <div className="steps-container">
@@ -85,7 +83,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats / Impact Section */}
       <section className="stats-section">
         <h2>Our Impact</h2>
         <div className="stats-container">
@@ -105,7 +102,6 @@ export default function Home() {
       </section>
 
 
-      {/* How It Works - Timeline Style */}
       <section className="how-it-works">
         <h2>How It Works</h2>
         <div className="timeline-container">
