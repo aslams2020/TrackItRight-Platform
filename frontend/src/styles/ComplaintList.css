@@ -120,3 +120,93 @@
   margin-right: 6px;
   font-size: 0.95rem;
 }
+
+/* Inline rating container */
+.rating-inline {
+  margin-top: 10px;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+/* Row layout for controls */
+.rating-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Label */
+.rating-row label {
+  color: #1e3a8a;
+  font-weight: 700;
+}
+
+/* Select and input */
+.rating-row select,
+.rating-row input[type="text"] {
+  padding: 6px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.rating-row select {
+  background: #f9fafb;
+}
+
+.rating-row input[type="text"] {
+  min-width: 240px;
+}
+
+/* Focus states */
+.rating-row select:focus,
+.rating-row input[type="text"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+/* Primary action */
+.rating-row .btn-submit {
+  background-color: #10b981;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform .15s ease, background-color .15s ease;
+}
+
+/* Hover/active */
+.rating-row .btn-submit:hover {
+  background-color: #059669;
+}
+.rating-row .btn-submit:active {
+  transform: translateY(1px);
+}
+
+/* Secondary action (cancel) */
+.rating-row .btn-secondary {
+  background-color: #e5e7eb;
+  color: #374151;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color .15s ease, transform .15s ease;
+}
+.rating-row .btn-secondary:hover {
+  background-color: #d1d5db;
+}
+.rating-row .btn-secondary:active {
+  transform: translateY(1px);
+}
