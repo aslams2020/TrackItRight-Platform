@@ -34,7 +34,7 @@ export default function AdminDashboard() {
     });
     const text = await res.text();
     let data = null;
-    try { data = text ? JSON.parse(text) : null; } catch (_) {}
+    try { data = text ? JSON.parse(text) : null; } catch (_) { }
     if (!res.ok) {
       throw new Error(data?.message || `${res.status} ${res.statusText}: ${text?.slice(0, 500)}`);
     }
@@ -60,9 +60,9 @@ export default function AdminDashboard() {
   };
 
   const objToArray = (obj, keyName, valueName) =>
-  obj && typeof obj === "object"
-    ? Object.entries(obj).map(([k, v]) => ({ [keyName]: k, [valueName]: v }))
-    : [];
+    obj && typeof obj === "object"
+      ? Object.entries(obj).map(([k, v]) => ({ [keyName]: k, [valueName]: v }))
+      : [];
 
   const loadReports = async () => {
     setErr("");
@@ -108,8 +108,9 @@ export default function AdminDashboard() {
 
   return (
     <div className="admin-dashboard">
+      <h2>Admin <span className="admin-span">Dashboard⚡</span></h2>
+      <div className="admin-main">
       <aside className="admin-sidebar">
-        <h2>Admin</h2>
         <nav>
           {TABS.map(tab => (
             <button
@@ -176,6 +177,7 @@ export default function AdminDashboard() {
           </section>
         )}
       </main>
+    </div>
     </div>
   );
 }
