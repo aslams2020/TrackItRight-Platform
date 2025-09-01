@@ -60,26 +60,28 @@ const ComplaintList = ({ complaints, onUpdated }) => {
                   ) : (
                     <>
                       {openRatingFor === c.id ? (
-                        <div style={{ marginTop: 8, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-                          <label>Rating</label>
-                          <select value={rating} onChange={(e) => setRating(e.target.value)}>
-                            {[1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}</option>)}
-                          </select>
-                          <input
-                            type="text"
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                            placeholder="Optional comment"
-                            style={{ minWidth: 220 }}
-                          />
-                          <button onClick={() => submitRating(c.id)}>Submit</button>
-                          <button className="secondary" onClick={() => setOpenRatingFor(null)}>Cancel</button>
+                        <div className="rating-inline">
+                          <div className="rating-row">
+                            <label>Rating</label>
+                            <select value={rating} onChange={(e) => setRating(e.target.value)}>
+                              {[1, 2, 3, 4, 5].map(n => <option key={n} value={n}>{n}</option>)}
+                            </select>
+                            <input
+                              type="text"
+                              value={comment}
+                              onChange={(e) => setComment(e.target.value)}
+                              placeholder="Optional comment"
+                            />
+                            <button className="btn-submit" onClick={() => submitRating(c.id)}>Submit</button>
+                            <button className="btn-secondary" onClick={() => setOpenRatingFor(null)}>Cancel</button>
+                          </div>
                         </div>
                       ) : (
                         <div style={{ marginTop: 6 }}>
                           <button onClick={() => setOpenRatingFor(c.id)}>Rate resolution</button>
                         </div>
                       )}
+
                     </>
                   )}
                 </div>
