@@ -42,14 +42,17 @@ const ComplaintList = ({ complaints, onUpdated }) => {
 
   return (
     <div className="complaint-list">
-      <h3>Your Complaints</h3>
+      <h3>Your <span className="complaintlist-span">Complaints</span></h3>
       {complaints.length === 0 ? (
         <p>No complaints registered yet.</p>
       ) : (
         <ul>
           {[...complaints].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((c) => (
             <li key={c.id}>
-              <strong>{c.title}</strong> — {c.status} <br />
+              <strong>{c.title}</strong> - {c.status} <br />
+              <div style={{ fontSize: ".9rem", color: "#ff0000ff", margin: "2px 0 6px" }}>
+                Department: {c.department?.name || c.departmentName || "-"}
+              </div>
               {c.description}
               {c.status === "RESOLVED" && (
                 <div style={{ marginTop: 6, color: "#374151" }}>
