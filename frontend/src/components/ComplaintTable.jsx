@@ -127,15 +127,15 @@ const ComplaintTable = ({ complaints, onUpdate }) => {
 
   return (
     <div className="complaint-table">
-      <h3>Department Complaints</h3>
+      <h3>Department <span className="complainttable-span">Complaints</span></h3>
       <table>
         <thead>
           <tr>
-            <th style={{ width: "16%" }}>Title</th>
-            <th style={{ width: "32%" }}>Description</th>
-            <th style={{ width: "14%" }}>Status</th>
-            <th style={{ width: "12%" }}>Citizen</th>
-            <th style={{ width: "36%" }}>Actions</th>
+            <th style={{ width: "17%" }}>Title</th>
+            <th style={{ width: "37%" }}>Description</th>
+            <th style={{ width: "16%" }}>Status</th>
+            <th style={{ width: "15%" }}>Citizen</th>
+            <th style={{ width: "12%" }}>Actions</th>
           </tr>
         </thead>
         <tbody>
