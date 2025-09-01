@@ -1,4 +1,3 @@
-/* src/components/DepartmentTable.css */
 .dept-table h4 {
   margin: 0 0 .5rem;
   font-size: 1.05rem;
@@ -14,12 +13,12 @@
 
 .dept-table thead th {
   text-align: left;
-  font-size: .9rem;
+  font-size: 1rem;
   font-weight: 600;
   padding: .6rem .6rem;
-  color: #374151;
+  color: #0643a4;
   border-bottom: 1px solid #e5e7eb;
-  background: #f9fafb;
+  background: #ecf3f9;
 }
 
 .dept-table tbody td {
@@ -53,17 +52,22 @@
 .dept-table button {
   background: #2563eb; color: #fff;
   border: none; border-radius: 8px;
-  padding: .45rem .8rem;
+  padding: 0.6rem 0.5rem !important;
   font-weight: 600;
   cursor: pointer;
   transition: background .2s, transform .08s;
 }
-.dept-table button:hover { background: #1d4ed8; }
-.dept-table button:active { transform: scale(.98); }
+.dept-table button:hover {
+   background: #1d4ed8; 
+  }
+.dept-table button:active {
+   transform: scale(.98); 
+  }
 
 .dept-table button.secondary {
-  background: #6b7280; /* gray-500 */
+  background: #6b7280;
 }
+
 .dept-table button.secondary:hover { 
     background: #4b5563; 
 }
