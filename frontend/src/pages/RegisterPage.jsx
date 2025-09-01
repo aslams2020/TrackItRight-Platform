@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import { toast } from '../utils/toast'; // optional small helper below
-import './AuthPages.css';
+import '../styles/AuthPages.css';
 import { ROLE_OPTIONS } from '../utils/constants';
 
 export default function RegisterPage() {
