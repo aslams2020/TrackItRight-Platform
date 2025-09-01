@@ -2,15 +2,21 @@
 .authority-dashboard {
   padding: 24px;
   min-height: 100vh;
-  background-color: #f9fafb; 
+  background-color: #ecf0ff; 
   font-family: 'Inter', sans-serif;
 }
 
 .authority-dashboard h2 {
-  font-size: 1.8rem;
+  font-size: 2.3rem;
   font-weight: 700;
+  text-align: center;
   color: #1e3a8a; 
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  margin-top: 5px;
+}
+
+.authority-span {
+  color: #ff9500;
 }
 
 /* Error banner */
@@ -25,6 +31,7 @@
 }
 
 .authority-dashboard .complaint-table {
+  /* background-color: #ffffff; */
   background-color: #ffffff;
   border-radius: 12px;
   padding: 20px;
