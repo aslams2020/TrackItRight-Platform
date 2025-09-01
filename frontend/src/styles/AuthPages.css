@@ -1,0 +1,263 @@
+/* === Auth Page Container === */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: linear-gradient(135deg, #f6f0e8, #f4e1d2); match landing page */
+  /* animation: bgShift 12s infinite alternate; */
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  padding: 2rem;
+}
+
+/* === Auth Card === */
+.auth-card {
+  background: #ffffffcc; 
+  backdrop-filter: blur(10px); 
+  padding: 3rem 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  max-width: 490px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+
+.auth-card:hover {
+  transform: translateY(-3px);
+}
+
+.auth-card h2 {
+  font-size: 2.2rem;
+  color: #242424;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.auth-card span {
+  color: #ff9500;
+}
+.login-h2 {
+  font-size: 2.2rem;
+  color: #242424;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+/* === Form === */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.auth-form label {
+  text-align: left;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: #555;
+}
+
+.login-label {
+  text-align: left;
+  font-weight: 500;
+  color: #555;
+  margin-top: 20px;
+}
+
+.auth-form input {
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #0056f7;
+  box-shadow: 0 0 5px rgba(247, 127, 0, 0.4);
+}
+
+.rolebar,
+.authority-group select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;             
+  width: 100%;
+  max-width: 480px;
+  box-sizing: border-box;
+  font: 500 14px/1.2 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #0f172a;               
+  background-color: #fff;
+  border: 1px solid #cbd5e1;    
+  border-radius: 8px;
+  padding: 10px 40px 10px 12px; 
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease;
+  cursor: pointer;
+} 
+
+.rolebar,
+.authority-group select {
+  /* background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23677' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 6l4 4 4-4'/></svg>"); */
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 16px;
+} 
+
+.rolebar::-ms-expand,
+.authority-group select::-ms-expand {
+  display: none;
+} 
+
+.rolebar:hover,
+.authority-group select:hover {
+  border-color: #94a3b8; 
+}
+
+.rolebar:focus-visible,
+.authority-group select:focus-visible {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+} 
+
+.rolebar:disabled,
+.authority-group select:disabled {
+  color: #94a3b8;          
+  background-color: #f8fafc;   
+  border-color: #e2e8f0;      
+  cursor: not-allowed;
+  /* background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%239AA' viewBox='0 0 24 24'><path d='M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm0 4a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V7a1 1 0 0 1 1-1Zm0 10a1.25 1.25 0 1 1 1.25-1.25A1.251 1.251 0 0 1 12 16Z'/></svg>"); */
+} 
+
+.rolebar:invalid,
+.authority-group select:invalid {
+  border-color: #ef4444; /* red-500 */
+} 
+
+.authority-group input {
+  margin-top: 5px;
+}
+
+.muted-first {
+  display: block;
+  color: #2472df !important; 
+  font-size: 13px;
+  margin-bottom: 22px;
+}
+
+.muted {
+  display: block;
+  margin-top: 6px;
+  color: #2472df !important; 
+  font-size: 13px;
+} 
+
+
+
+.error {
+  margin-top: 6px;
+  color: #dc2626;
+  font-weight: 500;
+  font-size: 13px;
+} 
+
+@media (prefers-reduced-motion: reduce) {
+  .rolebar,
+  .authority-group select {
+    transition: none;
+  }
+}
+@supports (appearance: base-select) {
+  .rolebar,
+  .authority-group select,
+  .rolebar::picker(select),
+  .authority-group select::picker(select) {
+    appearance: base-select;
+  }
+  .rolebar::picker-icon,
+  .authority-group select::picker-icon {
+    color: #64748b; /* slate-500 */
+  }
+} 
+
+
+.error {
+  color: #e63946;
+  font-size: 0.9rem;
+  text-align: left;
+  margin-top: -0.5rem;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  background: #002df7;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.9rem 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.btn:hover {
+  background: #034be6;
+  transform: translateY(-2px);
+}
+
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-outline {
+  border: 2px solid #6700f7;
+  color: #034be6;
+  background: transparent;
+  padding: 0.8rem 0;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: #034be6;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.login-buttons {
+  background: #002df7;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.7rem 1rem !important;
+  font-size: 14.5px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.register-btn {
+  padding: 0.8rem 1rem !important;
+  font-size: 15px;
+}
+/* Responsive */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 2rem 1.5rem;
+  }
+}
