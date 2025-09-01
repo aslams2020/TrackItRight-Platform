@@ -73,10 +73,10 @@ export default function UserTable({ users, departments, onChange }) {
         <thead>
           <tr>
             <th style={{width:"20%"}}>Name</th>
-            <th style={{width:"26%"}}>Email</th>
+            <th style={{width:"22%"}}>Email</th>
             <th style={{width:"14%"}}>Role</th>
             <th>Department</th>
-            <th style={{width:"28%"}}>Actions</th>
+            <th style={{width:"18%"}}>Actions</th>
           </tr>
         </thead>
         <tbody>
