@@ -6,42 +6,90 @@
   color: #111827;
 }
 
-.user-table table { width: 100%; border-collapse: separate; border-spacing: 0; }
+.user-table table {
+  width: 100%;
+  border-cllapse: separate;
+  border-spacing: 0;
+}
 
 .user-table thead th {
-  text-align: left; font-size: .9rem; font-weight: 600;
-  padding: .6rem .6rem; color: #374151;
-  border-bottom: 1px solid #e5e7eb; background: #f9fafb;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: .6rem .5rem;
+  color: #0643a4;
+  background: #ecf3f9;
+  border-bottom: 1px solid #e5e7eb;
+  /* background: #f9fafb; */
 }
 
 .user-table tbody td {
-  padding: .6rem .6rem; border-bottom: 1px solid #f3f4f6; color: #1f2937;
+  padding: .6rem .4rem !important;
+  border-bottom: 1px solid #f3f4f6;
+  color: #1f2937;
 }
-.user-table tbody tr:hover td { background: #f9fafb; }
+
+.user-table tbody tr:hover td {
+  background: #f9fafb;
+}
 
 .user-table select {
-  padding: .45rem .6rem; border: 1px solid #d1d5db; border-radius: 8px;
-  font-size: .95rem; transition: border-color .2s, box-shadow .2s;
-}
-.user-table select:focus {
-  outline: none; border-color: #2563eb; box-shadow: 0 0 0 2px rgba(37,99,235,.2);
+  padding: .45rem .6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: .95rem;
+  transition: border-color .2s, box-shadow .2s;
 }
 
-.row-actions { display: flex; gap: .5rem; flex-wrap: wrap; }
+.user-table select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, .2);
+}
+
+.row-actions {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
 
 .user-table button {
-  background: #2563eb; color: #fff;
-  border: none; border-radius: 8px;
-  padding: .45rem .8rem; font-weight: 600; cursor: pointer;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: .6rem .5rem !important;
+  font-weight: 600;
+  cursor: pointer;
   transition: background .2s, transform .08s;
 }
-.user-table button:hover { background: #1d4ed8; }
-.user-table button:active { transform: scale(.98); }
 
-.user-table button.secondary { background: #6b7280; }
-.user-table button.secondary:hover { background: #4b5563; }
+.user-table button:hover {
+  background: #1d4ed8;
+}
 
-.user-table button.danger { background: #dc2626; }
-.user-table button.danger:hover { background: #b91c1c; }
+.user-table button:active {
+  transform: scale(.98);
+}
 
-.muted { color: #6b7280; text-align: center; padding: .75rem; }
+.user-table button.secondary {
+  background: #6b7280;
+}
+
+.user-table button.secondary:hover {
+  background: #4b5563;
+}
+
+.user-table button.danger {
+  background: #dc2626;
+}
+
+.user-table button.danger:hover {
+  background: #b91c1c;
+}
+
+.muted {
+  color: #6b7280;
+  text-align: center;
+  padding: .75rem;
+}
