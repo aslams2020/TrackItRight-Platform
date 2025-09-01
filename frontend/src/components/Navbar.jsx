@@ -2,7 +2,7 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import { isAuthed, getRole, clearAuth } from "../utils/auth.js";
 import { FaGithub } from "react-icons/fa";
 import NotificationsIcon from "../components/notifications/NotificationsIcon";
-import "../styles/navbar.css"
+import "../styles/Navbar.css"
 
 export default function Navbar() {
   const navigate = useNavigate();
