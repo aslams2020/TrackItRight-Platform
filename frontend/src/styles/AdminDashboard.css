@@ -1,23 +1,41 @@
-
 .admin-dashboard {
   display: flex;
+  flex-direction: column;   
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
-  /* background-color: #f9fafb; */
   color: #1f2937;
+  gap: 16px;               
+  padding: 16px 0;       
+}
+
+.admin-dashboard > h2 {
+  margin: auto;         
+  font-size: 2.1rem;
+  margin-bottom: 30px;
+}
+
+.admin-span {
+  color: #ff9500;
+}
+
+.admin-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 0 24px;          
 }
 
 
 .admin-sidebar {
-  width: 220px;
-  background-color: #3474ff; 
+  width: 230px;
+  background-color: #0b4ddd; 
   color: #000000;
   display: flex;
   flex-direction: column;
   padding: 24px 16px;
   position: sticky;
   top: 0;
-   height: auto;
+  height: calc(100vh); 
 }
 
 .admin-sidebar h2 {
@@ -49,10 +67,11 @@
 
 .admin-sidebar .tab-btn:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  color: #ffd154;
 }
 
 .admin-sidebar .tab-btn.active {
-  background-color: #ffda47; 
+  background-color: #f5b810; 
   color: #ffffff;
   font-weight: 600;
 }
@@ -70,9 +89,10 @@
 }
 
 .admin-header h3 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  color: #2563eb;
+  margin-bottom: 0;
+  color: #114fd5;
 }
 
 .spinner {
