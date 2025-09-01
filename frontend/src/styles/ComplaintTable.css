@@ -1,18 +1,28 @@
 /* Container for both list and table */
-.complaint-list, .complaint-table {
+.complaint-list{
   background-color: #ffffff;
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
   margin-bottom: 30px;
 }
-
+.complaint-table  {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  margin: auto;          
+  position: relative;
+  right: 135px;
+  width: 1200px;       
+  max-width: 1280px; 
+}
 /* Titles */
 .complaint-list h3, .complaint-table h3 {
   color: #152c6c;
   font-size: 1.8rem;
   margin-bottom: 20px;
-  
   font-weight: 700;
   text-align: center;
 }
@@ -65,26 +75,40 @@
 
 /* Table Styles */
 .complaint-table table {
-  width: 50%;
+  width: 100%;
   border-collapse: collapse;
+  table-layout: auto;               /* let columns size naturally */
+  overflow-x: hidden;               /* avoid horizontal scrollbar */
 }
 
-.complaint-table th, .complaint-table td {
-  padding: 12px 10px;
+.complainttable-span {
+  color: #ff9500;
+}
+
+.complaint-table th{
+  padding: 15px 35px !important;
+  text-align: center !important;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 12px;
+}
+.complaint-table td {
+  padding: 15px 15px !important;
   text-align: left;
   border-bottom: 1px solid #e5e7eb;
   margin-bottom: 12px;
-
 }
 
 .complaint-table th {
   background-color: #f3f4f6;
+  padding: 15px !important;
+  font-size: 16px !important;
   color: #374151;
   font-weight: 600;
 }
 
 .complaint-table tr:hover {
   background-color: #f9fafb;
+  cursor: pointer;
 }
 
 .status-chip {
