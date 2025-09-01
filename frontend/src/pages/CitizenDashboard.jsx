@@ -5,7 +5,6 @@ import "../styles/CitizenDashboard.css"
 const CitizenDashboard = () => {
   const [complaints, setComplaints] = useState([]);
 
-  // Get token and userId from localStorage (set these during login)
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");  
 
