@@ -7,11 +7,16 @@
   margin-bottom: 30px;
 }
 
+.complaintlist-span {
+    color: #ff9500;
+}
+
 /* Titles */
 .complaint-list h3, .complaint-table h3 {
   color: #1e3a8a;
-  font-size: 1.5rem;
-  margin-bottom: 16px;
+  font-size: 2.1rem !important;
+  margin-bottom: 35px !important;
+  margin-top: 10px;
   font-weight: 700;
 }
 
@@ -24,10 +29,12 @@
 
 .complaint-list li {
   padding: 16px;
-  border-bottom: 1px solid #e5e7eb;
+  /* border-bottom: 1px solid #e5e7eb; */
   border-radius: 8px;
   margin-bottom: 12px;
-  background-color: #f9fafb;
+  border: 1px solid rgb(8, 81, 197) !important;
+  /* background-color: #f9fafb; */
+  background-color: #d9e2ff8d !important;
 }
 
 .complaint-list li strong {
