@@ -54,6 +54,7 @@ export default function Reports({ data }) {
                   <td>{r.status ?? "-"}</td>
                   <td>{r.count ?? r.total ?? 0}</td>
                 </tr>
+                
               )) : (
                 <tr><td colSpan={2} className="muted">No data.</td></tr>
               )}
